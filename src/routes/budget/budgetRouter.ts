@@ -1,9 +1,4 @@
-import {
-  type NextFunction,
-  type Request,
-  type Response,
-  Router,
-} from "express";
+import { type Request, type Response, Router } from "express";
 import type BudgetUseCases from "../../usecase/budget/budgetUseCases.js";
 import asyncHandler from "express-async-handler";
 import {
@@ -16,6 +11,7 @@ import { BudgetId } from "../../domain/budget.js";
 
 const paths = {
   CREATE_BUDGET: "/",
+  GET_BUDGETS: "/",
   GET_BUDGET: "/:budgetId",
 };
 
@@ -41,6 +37,13 @@ export const getBudget =
     }
   };
 
+export const getBudgets =
+  (getBudgets: BudgetUseCases["getBudgets"]) =>
+  async (req: Request, res: Response): Promise<void> => {
+    const budgets = await getBudgets();
+    res.status(StatusCodes.OK).json(budgets.map(BudgetConverter.toDto));
+  };
+
 const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   const router = Router();
   router.post(
@@ -50,6 +53,10 @@ const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   router.get(
     paths.GET_BUDGET,
     asyncHandler(getBudget(budgetUseCases.getBudget))
+  );
+  router.get(
+    paths.GET_BUDGETS,
+    asyncHandler(getBudgets(budgetUseCases.getBudgets))
   );
 
   return router;

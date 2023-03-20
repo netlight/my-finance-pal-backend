@@ -21,9 +21,15 @@ export const findBudget: BudgetRepository["findBudget"] = async (
   }
 };
 
+export const findBudgets: BudgetRepository["findBudgets"] = async () => {
+  const found = await BudgetModel.find();
+  return found.map(BudgetConverter.toDomain);
+};
+
 const BudgetMongoRepository: () => BudgetRepository = () => ({
   insertBudget,
   findBudget,
+  findBudgets,
 });
 
 export default BudgetMongoRepository;
