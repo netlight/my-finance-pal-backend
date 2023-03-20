@@ -3,18 +3,25 @@ import type BudgetRepository from "../../repository/budget/budgetRepository.js";
 import type BudgetUseCases from "./budgetUseCases.js";
 
 export const createBudget: (
-  repo: BudgetRepository
-) => BudgetUseCases["createBudget"] = (repo) => async (newBudget) => {
+  insertBudget: BudgetRepository["insertBudget"]
+) => BudgetUseCases["createBudget"] = (insertBudget) => async (newBudget) => {
   const budget: Budget = {
     id: new BudgetId(),
     transactions: [],
     ...newBudget,
   };
-  return await repo.insertBudget(budget);
+  return await insertBudget(budget);
+};
+
+export const getBudget: (
+  findBudget: BudgetRepository["findBudget"]
+) => BudgetUseCases["getBudget"] = (findBudget) => async (budgetId) => {
+  return await findBudget(budgetId);
 };
 
 const BudgetService: (repo: BudgetRepository) => BudgetUseCases = (repo) => ({
-  createBudget: createBudget(repo),
+  createBudget: createBudget(repo.insertBudget),
+  getBudget: getBudget(repo.findBudget),
 });
 
 export default BudgetService;
