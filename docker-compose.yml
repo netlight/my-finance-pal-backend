@@ -1,11 +1,10 @@
 version: "3.8"
-
 services:
   mongo:
     restart: always
     image: mongo:6.0.4
-    expose:
-      - 27017
+    ports:
+      - "27017:27017"
     volumes:
       - mongo_volume:/data/db
 

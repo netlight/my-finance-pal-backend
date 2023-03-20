@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { type Transaction } from "./Transaction.js";
+import { type Transaction } from "./transaction.js";
 
 export class BudgetId {
   uuid: string;
 
-  constructor() {
-    this.uuid = uuidv4();
+  constructor(uuid?: string) {
+    this.uuid = uuid ?? uuidv4();
   }
 }
 

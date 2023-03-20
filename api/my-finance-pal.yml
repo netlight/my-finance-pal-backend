@@ -1,0 +1,186 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: My Finance Pal
+  description: API of the personal finance budgeting app My Finance Pal
+
+paths:
+  /budgets:
+    post:
+      description: Create a new budget
+      operationId: createBudget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewBudget"
+      responses:
+        201:
+          description: Budget created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Budget"
+        400:
+          description: Invalid budget
+    get:
+      description: Get all budgets
+      operationId: getBudgets
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Budget"
+  /budgets/{budgetId}:
+    get:
+      description: Get a budget for a given ID
+      operationId: getBudget
+      parameters:
+        - in: path
+          name: budgetId
+          required: true
+          description: The UUID of the budget
+          schema:
+            $ref: "#/components/schemas/BudgetId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Budget"
+        404:
+          description: Budget not found
+    delete:
+      description: Delete a budget including all transactions
+      operationId: deleteBudget
+      parameters:
+        - in: path
+          name: budgetId
+          required: true
+          description: The UUID of the budget
+          schema:
+            $ref: "#/components/schemas/BudgetId"
+      responses:
+        204:
+          description: Budget successfully deleted
+        404:
+          description: Budget not found
+
+components:
+  schemas:
+    BudgetId:
+      type: string
+      format: uuid
+      description: Unique identifier of one budget
+      example: 850963b9-a04d-4698-b767-c0a0096b37c5
+    Budget:
+      type: object
+      description: Planned money to be available for tracking expenses related to a certain purpose over a period of time
+      required:
+        - id
+        - name
+        - amount
+        - transactions
+      properties:
+        id:
+          $ref: "#/components/schemas/BudgetId"
+        name:
+          type: string
+          description: The name of the budget
+          example: Takeout
+        amount:
+          type: number
+          minimum: 0
+          description: The total amount available for the budget
+          example: 250
+        startDate:
+          type: string
+          format: date
+          description: Date marking the start of the budget period
+          example: 2023-04-01
+        endDate:
+          type: string
+          format: date
+          description: Date marking the end of the budget period
+          example: 2023-04-30
+        transactions:
+          type: array
+          description: All transactions of the budget
+          items:
+            $ref: "#/components/schemas/Transaction"
+    NewBudget:
+      type: object
+      description: Budget to be created
+      required:
+        - name
+        - amount
+      properties:
+        name:
+          type: string
+          description: The name of the budget
+          example: Takeout
+        amount:
+          type: number
+          minimum: 0
+          description: The total amount available for the budget
+          example: 250
+        startDate:
+          type: string
+          format: date
+          description: Date marking the start of the budget period
+          example: 2023-04-01
+        endDate:
+          type: string
+          format: date
+          description: Date marking the end of the budget period
+          example: 2023-04-30
+    Transaction:
+      type: object
+      description: An expense or income related to a single budget
+      required:
+        - id
+        - description
+        - amount
+        - date
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of a transaction
+          example: cfd3b0b7-bf5e-43d4-8341-940d5e07487d
+        description:
+          type: string
+          description: Description of the transaction
+          example: Healthy breakfast at Five Guys
+        amount:
+          type: number
+          description: Amount of money contained in the transaction
+          example: 23.94
+        date:
+          type: string
+          format: date
+    NewTransaction:
+      type: object
+      description: A new transaction to be created
+      required:
+        - description
+        - amount
+        - date
+      properties:
+        description:
+          type: string
+          description: Description of the transaction
+          example: Healthy breakfast at Five Guys
+        amount:
+          type: number
+          description: Amount of money contained in the transaction
+          example: 23.94
+        date:
+          type: string
+          format: date

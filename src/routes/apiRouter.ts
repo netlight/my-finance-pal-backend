@@ -1,6 +1,6 @@
 import { Router } from "express";
-import type BudgetUseCases from "../usecase/budget/BudgetUseCases.js";
-import BudgetRouter from "./budget/BudgetRouter.js";
+import BudgetRouter from "./budget/budgetRouter.js";
+import type BudgetUseCases from "../usecase/budget/budgetUseCases.js";
 
 const paths = {
   BUDGETS: "/budgets",

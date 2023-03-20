@@ -1,5 +1,5 @@
 import { type components } from "../../../../generated/api.js";
-import { type Transaction } from "../../../models/Transaction.js";
+import { type Transaction } from "../../../domain/transaction.js";
 
 export type TransactionDto = components["schemas"]["Transaction"];
 

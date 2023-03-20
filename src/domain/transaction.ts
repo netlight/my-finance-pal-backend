@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 export class TransactionId {
   uuid: string;
 
-  constructor() {
-    this.uuid = uuidv4();
+  constructor(uuid?: string) {
+    this.uuid = uuid ?? uuidv4();
   }
 }
 

@@ -1,5 +1,5 @@
 import { type components } from "../../../../generated/api.js";
-import { Budget, type NewBudget } from "../../../models/Budget.js";
+import { type Budget, type NewBudget } from "../../../domain/budget.js";
 import { toDate } from "../../../util/date.js";
 import { TransactionConverter } from "./transaction.js";
 
