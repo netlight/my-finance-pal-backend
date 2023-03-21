@@ -1,16 +1,13 @@
-import { v4 as uuidv4 } from "uuid";
+import type UUID from "./uuid.js";
 
-export class TransactionId {
-  uuid: string;
+export type TransactionId = UUID;
 
-  constructor(uuid?: string) {
-    this.uuid = uuid ?? uuidv4();
-  }
-}
-
-export interface Transaction {
-  id: TransactionId;
+export interface NewTransaction {
   description: string;
   amount: number;
   date: Date;
+}
+
+export interface Transaction extends NewTransaction {
+  id: TransactionId;
 }

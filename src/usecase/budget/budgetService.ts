@@ -1,35 +1,40 @@
-import { type Budget, BudgetId } from "../../domain/budget.js";
-import type BudgetRepository from "../../repository/budget/budgetRepository.js";
+import { type BudgetSummary } from "../../domain/budget.js";
+import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryRepository.js";
 import type BudgetUseCases from "./budgetUseCases.js";
-import { findBudget } from "../../repository/budget/budgetMongoRepository.js";
+import UUID from "../../domain/uuid.js";
+import type BudgetRepository from "../../repository/budget/budgetRepository.js";
 
 export const createBudget: (
-  insertBudget: BudgetRepository["insertBudget"]
+  insertBudget: BudgetSummaryRepository["insert"]
 ) => BudgetUseCases["createBudget"] = (insertBudget) => async (newBudget) => {
-  const budget: Budget = {
-    id: new BudgetId(),
-    transactions: [],
+  const budgetSummary: BudgetSummary = {
     ...newBudget,
+    id: new UUID(),
+    spent: 0,
+    transactions: [],
   };
-  return await insertBudget(budget);
+  return await insertBudget(budgetSummary);
 };
 
-export const getBudget: (
-  findBudget: BudgetRepository["findBudget"]
-) => BudgetUseCases["getBudget"] = (findBudget) => async (budgetId) => {
+export const getBudgetSummary: (
+  findBudget: BudgetSummaryRepository["find"]
+) => BudgetUseCases["getBudgetSummary"] = (findBudget) => async (budgetId) => {
   return await findBudget(budgetId);
 };
 
 export const getBudgets: (
-  findBudgets: BudgetRepository["findBudgets"]
-) => BudgetUseCases["getBudgets"] = (findBudgets) => async () => {
-  return await findBudgets();
+  findBudgets: BudgetRepository["findAll"]
+) => BudgetUseCases["getBudgets"] = (findAll) => async () => {
+  return await findAll();
 };
 
-const BudgetService: (repo: BudgetRepository) => BudgetUseCases = (repo) => ({
-  createBudget: createBudget(repo.insertBudget),
-  getBudget: getBudget(repo.findBudget),
-  getBudgets: getBudgets(repo.findBudgets),
+const BudgetService: (
+  budgetSummaryRepo: BudgetSummaryRepository,
+  budgetRepo: BudgetRepository
+) => BudgetUseCases = (budgetSummaryRepo, budgetRepo) => ({
+  createBudget: createBudget(budgetSummaryRepo.insert),
+  getBudgetSummary: getBudgetSummary(budgetSummaryRepo.find),
+  getBudgets: getBudgets(budgetRepo.findAll),
 });
 
 export default BudgetService;

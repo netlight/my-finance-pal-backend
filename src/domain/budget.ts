@@ -1,22 +1,21 @@
-import { v4 as uuidv4 } from "uuid";
+import type UUID from "./uuid.js";
+import type Limit from "./limit.js";
 import { type Transaction } from "./transaction.js";
 
-export class BudgetId {
-  uuid: string;
-
-  constructor(uuid?: string) {
-    this.uuid = uuid ?? uuidv4();
-  }
-}
+export type BudgetId = UUID;
 
 export interface NewBudget {
   name: string;
-  amount: number;
+  limit: Limit;
   startDate?: Date;
   endDate?: Date;
 }
 
 export interface Budget extends NewBudget {
   id: BudgetId;
+  spent: number;
+}
+
+export interface BudgetSummary extends Budget {
   transactions: Transaction[];
 }

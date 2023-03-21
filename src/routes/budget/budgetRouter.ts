@@ -1,62 +1,63 @@
 import { type Request, type Response, Router } from "express";
 import type BudgetUseCases from "../../usecase/budget/budgetUseCases.js";
 import asyncHandler from "express-async-handler";
-import {
-  BudgetConverter,
-  NewBudgetConverter,
-  type NewBudgetDto,
-} from "./dto/budget.js";
+import { type NewBudgetDto } from "./dto/budget.js";
 import { StatusCodes } from "http-status-codes";
-import { BudgetId } from "../../domain/budget.js";
-
-const paths = {
-  CREATE_BUDGET: "/",
-  GET_BUDGETS: "/",
-  GET_BUDGET: "/:budgetId",
-};
+import {
+  BudgetDtoConverter,
+  BudgetSummaryDtoConverter,
+  NewBudgetDtoConverter,
+} from "./dto/converters.js";
+import toExpressPath from "../toExpressPath.js";
+import UUID from "../../domain/uuid.js";
+import apiPaths from "../apiPaths.js";
 
 export const createBudget =
   (createBudget: BudgetUseCases["createBudget"]) =>
   async (req: Request, res: Response): Promise<void> => {
     const dto: NewBudgetDto = req.body;
-    const newBudget = NewBudgetConverter.toDomain(dto);
+    const newBudget = NewBudgetDtoConverter.toDomain(dto);
     const createdBudget = await createBudget(newBudget);
 
-    res.status(StatusCodes.CREATED).json(BudgetConverter.toDto(createdBudget));
-  };
-
-export const getBudget =
-  (getBudget: BudgetUseCases["getBudget"]) =>
-  async (req: Request, res: Response): Promise<void> => {
-    const budgetId = new BudgetId(req.params.budgetId);
-    const budget = await getBudget(budgetId);
-    if (budget !== undefined) {
-      res.status(StatusCodes.OK).json(BudgetConverter.toDto(budget));
-    } else {
-      res.sendStatus(StatusCodes.NOT_FOUND);
-    }
+    res
+      .status(StatusCodes.CREATED)
+      .json(BudgetDtoConverter.toDto(createdBudget));
   };
 
 export const getBudgets =
   (getBudgets: BudgetUseCases["getBudgets"]) =>
   async (req: Request, res: Response): Promise<void> => {
     const budgets = await getBudgets();
-    res.status(StatusCodes.OK).json(budgets.map(BudgetConverter.toDto));
+    res.status(StatusCodes.OK).json(budgets.map(BudgetDtoConverter.toDto));
+  };
+
+export const getBudgetSummary =
+  (getBudgetSummary: BudgetUseCases["getBudgetSummary"]) =>
+  async (req: Request, res: Response): Promise<void> => {
+    const budgetId: string = req.params.budgetId;
+    const budgetSummary = await getBudgetSummary(new UUID(budgetId));
+    if (budgetSummary === undefined) {
+      res.sendStatus(StatusCodes.NOT_FOUND);
+    } else {
+      res
+        .status(StatusCodes.OK)
+        .json(BudgetSummaryDtoConverter.toDto(budgetSummary));
+    }
   };
 
 const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   const router = Router();
   router.post(
-    paths.CREATE_BUDGET,
+    toExpressPath(apiPaths.createBudget),
     asyncHandler(createBudget(budgetUseCases.createBudget))
   );
   router.get(
-    paths.GET_BUDGET,
-    asyncHandler(getBudget(budgetUseCases.getBudget))
+    toExpressPath(apiPaths.getBudgets),
+    asyncHandler(getBudgets(budgetUseCases.getBudgets))
   );
   router.get(
-    paths.GET_BUDGETS,
-    asyncHandler(getBudgets(budgetUseCases.getBudgets))
+    toExpressPath(apiPaths.getBudgetSummary),
+    asyncHandler(getBudgetSummary(budgetUseCases.getBudgetSummary))
   );
 
   return router;

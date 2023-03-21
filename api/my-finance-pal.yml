@@ -3,10 +3,16 @@ info:
   version: 1.0.0
   title: My Finance Pal
   description: API of the personal finance budgeting app My Finance Pal
-
+tags:
+  - name: transactions
+    description: Transaction of budgets
+  - name: budgets
+    description: Managing budgets
 paths:
   /budgets:
     post:
+      tags:
+        - budgets
       description: Create a new budget
       operationId: createBudget
       requestBody:
@@ -25,6 +31,8 @@ paths:
         400:
           description: Invalid budget
     get:
+      tags:
+        - budgets
       description: Get all budgets
       operationId: getBudgets
       responses:
@@ -36,10 +44,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Budget"
-  /budgets/{budgetId}:
+  /budgets/{budgetId}/summary:
     get:
-      description: Get a budget for a given ID
-      operationId: getBudget
+      tags:
+        - budgets
+      description: Get a budget summary including all transactions for a given ID
+      operationId: getBudgetSummary
       parameters:
         - in: path
           name: budgetId
@@ -53,10 +63,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Budget"
+                $ref: "#/components/schemas/BudgetSummary"
         404:
           description: Budget not found
+  /budgets/{budgetId}:
     delete:
+      tags:
+        - budgets
       description: Delete a budget including all transactions
       operationId: deleteBudget
       parameters:
@@ -71,8 +84,46 @@ paths:
           description: Budget successfully deleted
         404:
           description: Budget not found
+  /budgets/{budgetId}/transactions:
+    post:
+      tags:
+        - transactions
+      description: Register a new transaction for a budget
+      operationId: createTransaction
+      parameters:
+        - $ref: "#/components/parameters/BudgetIdParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewTransaction"
+      responses:
+        201:
+          description: Transaction created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        404:
+          description: Budget not found
 
 components:
+  parameters:
+    BudgetIdParam:
+      in: path
+      name: budgetId
+      required: true
+      description: The UUID of the budget
+      schema:
+        $ref: "#/components/schemas/BudgetId"
+    TransactionIdParam:
+      in: path
+      name: transactionId
+      required: true
+      description: The UUID of the transaction
+      schema:
+        $ref: "#/components/schemas/TransactionId"
   schemas:
     BudgetId:
       type: string
@@ -85,7 +136,42 @@ components:
       required:
         - id
         - name
-        - amount
+        - limit
+        - spent
+      properties:
+        id:
+          $ref: "#/components/schemas/BudgetId"
+        name:
+          type: string
+          description: The name of the budget
+          example: Takeout
+        limit:
+          type: number
+          minimum: 0
+          description: The total amount available for the budget
+          example: 250
+        spent:
+          type: number
+          minimum: 0
+          description: The summed up spent amount of all transaction of that budget
+        startDate:
+          type: string
+          format: date
+          description: Date marking the start of the budget period
+          example: 2023-04-01
+        endDate:
+          type: string
+          format: date
+          description: Date marking the end of the budget period
+          example: 2023-04-30
+    BudgetSummary:
+      type: object
+      description: Summary of the whole budget including all transactions
+      required:
+        - id
+        - name
+        - limit
+        - spent
         - transactions
       properties:
         id:
@@ -94,11 +180,15 @@ components:
           type: string
           description: The name of the budget
           example: Takeout
-        amount:
+        limit:
           type: number
           minimum: 0
           description: The total amount available for the budget
           example: 250
+        spent:
+          type: number
+          minimum: 0
+          description: The summed up spent amount of all transaction of that budget
         startDate:
           type: string
           format: date
@@ -119,13 +209,13 @@ components:
       description: Budget to be created
       required:
         - name
-        - amount
+        - limit
       properties:
         name:
           type: string
           description: The name of the budget
           example: Takeout
-        amount:
+        limit:
           type: number
           minimum: 0
           description: The total amount available for the budget
@@ -140,6 +230,11 @@ components:
           format: date
           description: Date marking the end of the budget period
           example: 2023-04-30
+    TransactionId:
+      type: string
+      format: uuid
+      description: Unique identifier of a transaction
+      example: cfd3b0b7-bf5e-43d4-8341-940d5e07487d
     Transaction:
       type: object
       description: An expense or income related to a single budget
@@ -150,10 +245,7 @@ components:
         - date
       properties:
         id:
-          type: string
-          format: uuid
-          description: Unique identifier of a transaction
-          example: cfd3b0b7-bf5e-43d4-8341-940d5e07487d
+          $ref: "#/components/schemas/TransactionId"
         description:
           type: string
           description: Description of the transaction
