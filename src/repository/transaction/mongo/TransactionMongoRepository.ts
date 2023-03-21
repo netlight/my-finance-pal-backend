@@ -1,5 +1,5 @@
 import type TransactionRepository from "../transactionRepository.js";
-import { TransactionConverter } from "../entity/converters.js";
+import { TransactionEntityConverter } from "../entity/converters.js";
 import { BudgetSummaryModel } from "../../budget/mongo/models.js";
 import { TransactionsModel } from "./models.js";
 
@@ -9,7 +9,7 @@ export const findAllTransactionsForBudget: TransactionRepository["findAllForBudg
       id: budgetId.value,
     });
     if (budgetTransactions !== null) {
-      return budgetTransactions.transactions.map(TransactionConverter.toDomain);
+      return budgetTransactions.transactions.map(TransactionEntityConverter.toDomain);
     }
   };
 
@@ -18,7 +18,7 @@ export const insertTransaction: TransactionRepository["insert"] = async (
   spent,
   transaction
 ) => {
-  const transactionEntity = TransactionConverter.toEntity(transaction);
+  const transactionEntity = TransactionEntityConverter.toEntity(transaction);
   const updatedSummary = await BudgetSummaryModel.findOneAndUpdate(
     { id: budgetId.value },
     {
@@ -31,7 +31,7 @@ export const insertTransaction: TransactionRepository["insert"] = async (
     (t) => t.id === transaction.id.value
   );
   if (updatedTransaction !== undefined) {
-    return TransactionConverter.toDomain(updatedTransaction);
+    return TransactionEntityConverter.toDomain(updatedTransaction);
   }
 };
 

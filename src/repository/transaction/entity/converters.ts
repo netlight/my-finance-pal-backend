@@ -2,7 +2,7 @@ import { type Transaction } from "../../../domain/transaction.js";
 import UUID from "../../../domain/uuid.js";
 import type TransactionEntity from "./transactionEntity.js";
 
-export const TransactionConverter = {
+export const TransactionEntityConverter = {
   toEntity: (domain: Transaction): TransactionEntity => ({
     id: domain.id.value,
     description: domain.description,

@@ -4,7 +4,7 @@ import transactionSchema from "../../../transaction/mongo/schema/transactionSche
 
 const Types = Schema.Types;
 
-const budgetSchema = new mongoose.Schema<BudgetSummaryEntity>(
+const budgetSummarySchema = new mongoose.Schema<BudgetSummaryEntity>(
   {
     id: Types.UUID,
     name: Types.String,
@@ -17,4 +17,4 @@ const budgetSchema = new mongoose.Schema<BudgetSummaryEntity>(
   { strict: true, timestamps: true }
 );
 
-export default budgetSchema;
+export default budgetSummarySchema;

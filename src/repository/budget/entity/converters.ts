@@ -3,9 +3,9 @@ import type BudgetSummaryEntity from "./budgetSummaryEntity.js";
 import UUID from "../../../domain/uuid.js";
 import Limit from "../../../domain/limit.js";
 import type BudgetEntity from "./budgetEntity.js";
-import { TransactionConverter } from "../../transaction/entity/converters.js";
+import { TransactionEntityConverter } from "../../transaction/entity/converters.js";
 
-export const BudgetConverter = {
+export const BudgetEntityConverter = {
   toDomain: (entity: BudgetEntity): Budget => ({
     id: new UUID(entity.id),
     name: entity.name,
@@ -16,7 +16,7 @@ export const BudgetConverter = {
   }),
 };
 
-export const BudgetSummaryConverter = {
+export const BudgetSummaryEntityConverter = {
   toEntity: (domain: BudgetSummary): BudgetSummaryEntity => ({
     id: domain.id.value,
     name: domain.name,
@@ -24,7 +24,7 @@ export const BudgetSummaryConverter = {
     spent: domain.spent,
     startDate: domain.startDate,
     endDate: domain.endDate,
-    transactions: domain.transactions.map(TransactionConverter.toEntity),
+    transactions: domain.transactions.map(TransactionEntityConverter.toEntity),
   }),
   toDomain: (entity: BudgetSummaryEntity): BudgetSummary => ({
     id: new UUID(entity.id),
@@ -33,6 +33,6 @@ export const BudgetSummaryConverter = {
     spent: entity.spent,
     startDate: entity.startDate,
     endDate: entity.endDate,
-    transactions: entity.transactions.map(TransactionConverter.toDomain),
+    transactions: entity.transactions.map(TransactionEntityConverter.toDomain),
   }),
 };
