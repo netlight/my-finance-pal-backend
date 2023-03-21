@@ -1,7 +1,9 @@
 import expressWinston from "express-winston";
 import winston from "winston";
+import environment from "../config/environment.js";
 
 const expressLogger = expressWinston.logger({
+  level: environment.LOG_LEVEL,
   transports: [new winston.transports.Console()],
   format: winston.format.combine(
     winston.format.colorize(),
