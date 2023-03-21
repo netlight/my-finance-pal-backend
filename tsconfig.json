@@ -79,6 +79,7 @@
   "include": [
     "src/**/*.ts",
     "generated/**/*.ts",
-    "env/*.env"
+    "env",
+    "api"
   ],
 }
