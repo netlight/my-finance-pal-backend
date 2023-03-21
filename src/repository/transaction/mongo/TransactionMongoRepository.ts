@@ -9,7 +9,9 @@ export const findAllTransactionsForBudget: TransactionRepository["findAllForBudg
       id: budgetId.value,
     });
     if (budgetTransactions !== null) {
-      return budgetTransactions.transactions.map(TransactionEntityConverter.toDomain);
+      return budgetTransactions.transactions.map(
+        TransactionEntityConverter.toDomain
+      );
     }
   };
 
