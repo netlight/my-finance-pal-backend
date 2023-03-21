@@ -1,13 +1,14 @@
 import type TransactionRepository from "../transactionRepository.js";
 import { TransactionEntityConverter } from "../entity/converters.js";
 import { BudgetSummaryModel } from "../../budget/mongo/models.js";
-import { TransactionsModel } from "./models.js";
+import type BudgetSummaryEntity from "../../budget/entity/budgetSummaryEntity.js";
 
 export const findAllTransactionsForBudget: TransactionRepository["findAllForBudget"] =
   async (budgetId) => {
-    const budgetTransactions = await TransactionsModel.findOne({
-      id: budgetId.value,
-    });
+    const budgetTransactions: Pick<BudgetSummaryEntity, "transactions"> | null =
+      await BudgetSummaryModel.findOne({
+        id: budgetId.value,
+      }).select("transactions");
     if (budgetTransactions !== null) {
       return budgetTransactions.transactions.map(
         TransactionEntityConverter.toDomain
