@@ -4,7 +4,7 @@ import {
   type NewBudget,
 } from "../../../domain/budget.js";
 import Limit from "../../../domain/limit.js";
-import { toDate } from "../../../util/date.js";
+import { toDate, toIsoDate } from "../../../util/date.js";
 import {
   type BudgetDto,
   type BudgetSummaryDto,
@@ -27,8 +27,8 @@ export const BudgetDtoConverter = {
     limit: domain.limit.amount,
     spent: domain.spent,
     name: domain.name,
-    startDate: domain.startDate?.toISOString(),
-    endDate: domain.endDate?.toISOString(),
+    startDate: toIsoDate(domain.startDate),
+    endDate: toIsoDate(domain.endDate),
   }),
 };
 
@@ -38,8 +38,8 @@ export const BudgetSummaryDtoConverter = {
     limit: domain.limit.amount,
     spent: domain.spent,
     name: domain.name,
-    startDate: domain.startDate?.toISOString(),
-    endDate: domain.endDate?.toISOString(),
+    startDate: toIsoDate(domain.startDate),
+    endDate: toIsoDate(domain.endDate),
     transactions: domain.transactions.map(TransactionDtoConverter.toDto),
   }),
 };

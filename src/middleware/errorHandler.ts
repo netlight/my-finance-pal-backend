@@ -1,7 +1,7 @@
 import type * as Http from "http";
 import logger from "../logging/logger.js";
 import * as util from "util";
-import { NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Request, type Response } from "express";
 
 let httpServerRef: Http.Server;
 
@@ -103,5 +103,8 @@ export const errorHandler = (
   }
   // ✅ Best Practice: Pass all error to a centralized error handler so they get treated equally
   handleError(err);
-  res.status((err as AppError).HTTPStatus ?? 500).end();
+  res
+    .status((err as AppError).HTTPStatus ?? 500)
+    .json({ message: err.message, errors: (err as any).errors })
+    .end();
 };

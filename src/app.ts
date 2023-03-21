@@ -9,9 +9,10 @@ import BudgetMongoRepository from "./repository/budget/mongo/budgetMongoReposito
 import BudgetSummaryMongoRepository from "./repository/budget/mongo/budgetSummaryMongoRepository.js";
 import TransactionService from "./usecase/transaction/transactionService.js";
 import TransactionMongoRepository from "./repository/transaction/mongo/TransactionMongoRepository.js";
+import OpenApiValidator from "express-openapi-validator";
 
 const app = express();
-const API_ROOT = "/api";
+const API_ROOT = "/";
 
 app.use(expressLogger);
 app.use(express.json());
@@ -20,6 +21,14 @@ app.use(express.urlencoded({ extended: true }));
 if (environment.isProd) {
   app.use(helmet());
 }
+
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec: new URL(`../api/my-finance-pal.yml`, import.meta.url).pathname,
+    validateRequests: true,
+    validateResponses: true,
+  })
+);
 
 const budgetUseCases = BudgetService(
   BudgetSummaryMongoRepository(),
