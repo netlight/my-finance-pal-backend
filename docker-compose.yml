@@ -8,5 +8,15 @@ services:
     volumes:
       - mongo_volume:/data/db
 
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_CONNECTION_STRING=mongodb://mongo:27017
+    depends_on:
+      - mongo
+
 volumes:
   mongo_volume:
