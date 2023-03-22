@@ -3,9 +3,9 @@ import environment from "./environment.js";
 import logger from "../logging/logger.js";
 import * as util from "util";
 
-const connect = async (): Promise<void> => {
+export const connect = async (): Promise<void> => {
   await mongoose.connect(environment.DATABASE_CONNECTION_STRING, {
-    dbName: "my-finance-pal",
+    dbName: environment.DATABASE_NAME,
   });
 };
 

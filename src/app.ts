@@ -12,7 +12,6 @@ import TransactionMongoRepository from "./repository/transaction/mongo/Transacti
 import OpenApiValidator from "express-openapi-validator";
 
 const app = express();
-const API_ROOT = "/";
 
 app.use(expressLogger);
 app.use(express.json());
@@ -35,7 +34,7 @@ const budgetUseCases = BudgetService(
   BudgetMongoRepository()
 );
 const transactionUseCases = TransactionService(TransactionMongoRepository());
-app.use(API_ROOT, ApiRouter(budgetUseCases, transactionUseCases));
+app.use(ApiRouter(budgetUseCases, transactionUseCases));
 
 app.use(errorHandler);
 
