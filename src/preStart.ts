@@ -7,6 +7,7 @@
 // NOTE: DO NOT IMPORT ANY SOURCE CODE HERE
 import dotenv from "dotenv";
 import { parse } from "ts-command-line-args";
+import path from "path";
 
 // **** Types **** //
 
@@ -27,7 +28,7 @@ const args = parse<Args>({
 
 // Set the env file
 const dotenvConfig = dotenv.config({
-  path: new URL(`../env/${args.env}.env`, import.meta.url).pathname,
+  path: path.join(__dirname, "..", "env", `${args.env}.env`),
 });
 if (dotenvConfig.error != null) {
   throw dotenvConfig.error;

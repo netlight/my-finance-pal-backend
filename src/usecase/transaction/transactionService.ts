@@ -1,7 +1,7 @@
-import type TransactionRepository from "../../repository/transaction/transactionRepository.js";
-import type TransactionUseCases from "./transactionUseCases.js";
-import { type Transaction } from "../../domain/transaction.js";
-import UUID from "../../domain/uuid.js";
+import type TransactionRepository from "../../repository/transaction/transactionRepository";
+import type TransactionUseCases from "./transactionUseCases";
+import { type Transaction } from "../../domain/transaction";
+import UUID from "../../domain/uuid";
 import currency from "currency.js";
 
 const addNewTransactionToBudget: (

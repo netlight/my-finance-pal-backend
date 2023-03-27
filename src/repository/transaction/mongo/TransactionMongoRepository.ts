@@ -1,7 +1,7 @@
-import type TransactionRepository from "../transactionRepository.js";
-import { TransactionEntityConverter } from "../entity/converters.js";
-import { BudgetSummaryModel } from "../../budget/mongo/models.js";
-import type BudgetSummaryEntity from "../../budget/entity/budgetSummaryEntity.js";
+import type TransactionRepository from "../transactionRepository";
+import { TransactionEntityConverter } from "../entity/converters";
+import { BudgetSummaryModel } from "../../budget/mongo/models";
+import type BudgetSummaryEntity from "../../budget/entity/budgetSummaryEntity";
 
 export const findAllTransactionsForBudget: TransactionRepository["findAllForBudget"] =
   async (budgetId) => {

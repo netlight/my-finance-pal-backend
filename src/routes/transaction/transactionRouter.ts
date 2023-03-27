@@ -1,13 +1,13 @@
-import type TransactionUseCases from "../../usecase/transaction/transactionUseCases.js";
+import type TransactionUseCases from "../../usecase/transaction/transactionUseCases";
 import { type Request, type Response, Router } from "express";
 import {
   NewTransactionDtoConverter,
   TransactionDtoConverter,
-} from "./dto/converters.js";
-import UUID from "../../domain/uuid.js";
+} from "./dto/converters";
+import UUID from "../../domain/uuid";
 import { StatusCodes } from "http-status-codes";
-import toExpressPath from "../toExpressPath.js";
-import apiPaths from "../apiPaths.js";
+import toExpressPath from "../toExpressPath";
+import apiPaths from "../apiPaths";
 import asyncHandler from "express-async-handler";
 
 export const createTransaction =

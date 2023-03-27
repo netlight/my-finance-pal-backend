@@ -1,8 +1,8 @@
 import { Router } from "express";
-import BudgetRouter from "./budget/budgetRouter.js";
-import type BudgetUseCases from "../usecase/budget/budgetUseCases.js";
-import TransactionRouter from "./transaction/transactionRouter.js";
-import type TransactionUseCases from "../usecase/transaction/transactionUseCases.js";
+import BudgetRouter from "./budget/budgetRouter";
+import type BudgetUseCases from "../usecase/budget/budgetUseCases";
+import TransactionRouter from "./transaction/transactionRouter";
+import type TransactionUseCases from "../usecase/transaction/transactionUseCases";
 
 const ApiRouter = (
   budgetUseCases: BudgetUseCases,

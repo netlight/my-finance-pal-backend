@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import type BudgetSummaryEntity from "../../entity/budgetSummaryEntity.js";
-import transactionSchema from "../../../transaction/mongo/schema/transactionSchema.js";
+import type BudgetSummaryEntity from "../../entity/budgetSummaryEntity";
+import transactionSchema from "../../../transaction/mongo/schema/transactionSchema";
 
 const Types = Schema.Types;
 

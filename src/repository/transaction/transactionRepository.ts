@@ -1,5 +1,5 @@
-import { type Transaction } from "../../domain/transaction.js";
-import { type BudgetId } from "../../domain/budget.js";
+import { type Transaction } from "../../domain/transaction";
+import { type BudgetId } from "../../domain/budget";
 
 interface TransactionRepository {
   findAllForBudget: (budgetId: BudgetId) => Promise<Transaction[] | undefined>;

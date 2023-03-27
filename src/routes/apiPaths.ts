@@ -1,4 +1,4 @@
-import { type operations, type paths } from "../../generated/api.js";
+import { type operations, type paths } from "../../generated/api";
 
 const apiPaths: Record<keyof operations, keyof paths> = {
   createBudget: "/budgets",

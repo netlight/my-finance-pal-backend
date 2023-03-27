@@ -1,4 +1,4 @@
-import type TransactionEntity from "../../transaction/entity/transactionEntity.js";
+import type TransactionEntity from "../../transaction/entity/transactionEntity";
 
 interface BudgetSummaryEntity {
   id: string;

@@ -1,9 +1,9 @@
-import { type Budget, type BudgetSummary } from "../../../domain/budget.js";
-import type BudgetSummaryEntity from "./budgetSummaryEntity.js";
-import UUID from "../../../domain/uuid.js";
-import Limit from "../../../domain/limit.js";
-import type BudgetEntity from "./budgetEntity.js";
-import { TransactionEntityConverter } from "../../transaction/entity/converters.js";
+import { type Budget, type BudgetSummary } from "../../../domain/budget";
+import type BudgetSummaryEntity from "./budgetSummaryEntity";
+import UUID from "../../../domain/uuid";
+import Limit from "../../../domain/limit";
+import type BudgetEntity from "./budgetEntity";
+import { TransactionEntityConverter } from "../../transaction/entity/converters";
 
 export const BudgetEntityConverter = {
   toDomain: (entity: BudgetEntity): Budget => ({

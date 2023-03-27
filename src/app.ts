@@ -1,15 +1,16 @@
 import express from "express";
 import helmet from "helmet";
-import environment from "./config/environment.js";
-import expressLogger from "./logging/expressLogger.js";
-import ApiRouter from "./routes/apiRouter.js";
-import BudgetService from "./usecase/budget/budgetService.js";
-import { errorHandler } from "./middleware/errorHandler.js";
-import BudgetMongoRepository from "./repository/budget/mongo/budgetMongoRepository.js";
-import BudgetSummaryMongoRepository from "./repository/budget/mongo/budgetSummaryMongoRepository.js";
-import TransactionService from "./usecase/transaction/transactionService.js";
-import TransactionMongoRepository from "./repository/transaction/mongo/TransactionMongoRepository.js";
-import OpenApiValidator from "express-openapi-validator";
+import environment from "./config/environment";
+import expressLogger from "./logging/expressLogger";
+import ApiRouter from "./routes/apiRouter";
+import BudgetService from "./usecase/budget/budgetService";
+import { errorHandler } from "./middleware/errorHandler";
+import BudgetMongoRepository from "./repository/budget/mongo/budgetMongoRepository";
+import BudgetSummaryMongoRepository from "./repository/budget/mongo/budgetSummaryMongoRepository";
+import TransactionService from "./usecase/transaction/transactionService";
+import TransactionMongoRepository from "./repository/transaction/mongo/TransactionMongoRepository";
+import * as OpenApiValidator from "express-openapi-validator";
+import * as path from "path";
 
 const app = express();
 
@@ -23,7 +24,7 @@ if (environment.isProd) {
 
 app.use(
   OpenApiValidator.middleware({
-    apiSpec: new URL(`../api/my-finance-pal.yml`, import.meta.url).pathname,
+    apiSpec: path.join(__dirname, "..", "api", "my-finance-pal.yml"),
     validateRequests: true,
     validateResponses: true,
   })

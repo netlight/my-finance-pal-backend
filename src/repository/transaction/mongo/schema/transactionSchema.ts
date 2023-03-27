@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import type TransactionEntity from "../../entity/transactionEntity.js";
+import type TransactionEntity from "../../entity/transactionEntity";
 
 const Types = Schema.Types;
 

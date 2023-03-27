@@ -1,4 +1,4 @@
-import type UUID from "./uuid.js";
+import type UUID from "./uuid";
 
 export type TransactionId = UUID;
 

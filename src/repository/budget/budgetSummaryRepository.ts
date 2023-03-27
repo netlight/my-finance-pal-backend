@@ -1,4 +1,4 @@
-import { type BudgetId, type BudgetSummary } from "../../domain/budget.js";
+import { type BudgetId, type BudgetSummary } from "../../domain/budget";
 
 interface BudgetSummaryRepository {
   insert: (summary: BudgetSummary) => Promise<BudgetSummary>;
