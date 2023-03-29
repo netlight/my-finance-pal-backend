@@ -1,7 +1,7 @@
-import { type BudgetSummary, type NewBudget } from "src/domain/budget";
-import Limit from "src/domain/limit";
 import { createBudget } from "./budgetService";
 import type BudgetUseCases from "./budgetUseCases";
+import { type BudgetSummary, type NewBudget } from "../../domain/budget";
+import Limit from "../../domain/limit";
 
 describe("budgetService", () => {
   it("calls the create function with the correct object", async () => {
