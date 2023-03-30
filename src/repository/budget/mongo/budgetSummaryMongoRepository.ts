@@ -1,7 +1,7 @@
-import type BudgetSummaryRepository from "../budgetSummaryRepository.js";
-import { BudgetSummaryEntityConverter } from "../entity/converters.js";
-import { type BudgetId } from "../../../domain/budget.js";
-import { BudgetSummaryModel } from "./models.js";
+import type BudgetSummaryRepository from "../budgetSummaryRepository";
+import { BudgetSummaryEntityConverter } from "../entity/converters";
+import { type BudgetId } from "../../../domain/budget";
+import { BudgetSummaryModel } from "./models";
 
 export const insertBudgetSummary: BudgetSummaryRepository["insert"] = async (
   summary

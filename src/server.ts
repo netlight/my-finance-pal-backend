@@ -1,12 +1,14 @@
-import "./preStart.js";
+import "./preStart";
 import * as http from "http";
-import app from "./app.js";
-import { listenToErrorEvents } from "./middleware/errorHandler.js";
-import logger from "./logging/logger.js";
-import environment from "./config/environment.js";
-import mongoDb from "./config/mongoDb.js";
+import app from "./app";
+import { listenToErrorEvents } from "./middleware/errorHandler";
+import logger from "./logging/logger";
+import environment from "./config/environment";
+import mongoDb from "./config/mongoDb";
 
-await mongoDb.connect();
+void (async () => {
+  await mongoDb.connect();
+})();
 
 const onListening = (server: http.Server) => (): void => {
   const addr = server.address();

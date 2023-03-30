@@ -1,6 +1,6 @@
-import type UUID from "./uuid.js";
-import type Limit from "./limit.js";
-import { type Transaction } from "./transaction.js";
+import type UUID from "./uuid";
+import type Limit from "./limit";
+import { type Transaction } from "./transaction";
 
 export type BudgetId = UUID;
 

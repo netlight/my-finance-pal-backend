@@ -1,5 +1,5 @@
 import { v4 as uuidv4, validate as validateUUID } from "uuid";
-import { AppError } from "../middleware/errorHandler.js";
+import { AppError } from "../middleware/errorHandler";
 
 class UUID {
   public value: string;

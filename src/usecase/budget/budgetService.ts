@@ -1,8 +1,8 @@
-import { type BudgetSummary } from "../../domain/budget.js";
-import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryRepository.js";
-import type BudgetUseCases from "./budgetUseCases.js";
-import UUID from "../../domain/uuid.js";
-import type BudgetRepository from "../../repository/budget/budgetRepository.js";
+import { type BudgetSummary } from "../../domain/budget";
+import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryRepository";
+import type BudgetUseCases from "./budgetUseCases";
+import UUID from "../../domain/uuid";
+import type BudgetRepository from "../../repository/budget/budgetRepository";
 
 export const createBudget: (
   insertBudget: BudgetSummaryRepository["insert"]

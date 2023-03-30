@@ -3,7 +3,7 @@ import {
   type BudgetId,
   type BudgetSummary,
   type NewBudget,
-} from "../../domain/budget.js";
+} from "../../domain/budget";
 
 interface BudgetUseCases {
   createBudget: (newBudget: NewBudget) => Promise<Budget>;

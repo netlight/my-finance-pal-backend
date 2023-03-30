@@ -2,15 +2,15 @@ import {
   type Budget,
   type BudgetSummary,
   type NewBudget,
-} from "../../../domain/budget.js";
-import Limit from "../../../domain/limit.js";
-import { toDate, toIsoDate } from "../../../util/date.js";
+} from "../../../domain/budget";
+import Limit from "../../../domain/limit";
+import { toDate, toIsoDate } from "../../../util/date";
 import {
   type BudgetDto,
   type BudgetSummaryDto,
   type NewBudgetDto,
-} from "./budget.js";
-import { TransactionDtoConverter } from "../../transaction/dto/converters.js";
+} from "./budget";
+import { TransactionDtoConverter } from "../../transaction/dto/converters";
 
 export const NewBudgetDtoConverter = {
   toDomain: (dto: NewBudgetDto): NewBudget => ({

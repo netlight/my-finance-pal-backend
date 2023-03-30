@@ -1,4 +1,4 @@
-import { type Budget } from "../../domain/budget.js";
+import { type Budget } from "../../domain/budget";
 
 interface BudgetRepository {
   findAll: () => Promise<Budget[]>;

@@ -1,16 +1,16 @@
 import { type Request, type Response, Router } from "express";
-import type BudgetUseCases from "../../usecase/budget/budgetUseCases.js";
+import type BudgetUseCases from "../../usecase/budget/budgetUseCases";
 import asyncHandler from "express-async-handler";
-import { type NewBudgetDto } from "./dto/budget.js";
+import { type NewBudgetDto } from "./dto/budget";
 import { StatusCodes } from "http-status-codes";
 import {
   BudgetDtoConverter,
   BudgetSummaryDtoConverter,
   NewBudgetDtoConverter,
-} from "./dto/converters.js";
-import toExpressPath from "../toExpressPath.js";
-import UUID from "../../domain/uuid.js";
-import apiPaths from "../apiPaths.js";
+} from "./dto/converters";
+import toExpressPath from "../toExpressPath";
+import UUID from "../../domain/uuid";
+import apiPaths from "../apiPaths";
 
 export const createBudget =
   (createBudget: BudgetUseCases["createBudget"]) =>

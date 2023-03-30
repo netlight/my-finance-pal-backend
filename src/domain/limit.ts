@@ -1,4 +1,4 @@
-import { AppError } from "../middleware/errorHandler.js";
+import { AppError } from "../middleware/errorHandler";
 
 class Limit {
   constructor(public amount: number) {

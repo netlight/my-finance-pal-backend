@@ -1,8 +1,8 @@
-import { type BudgetId } from "../../domain/budget.js";
+import { type BudgetId } from "../../domain/budget";
 import {
   type NewTransaction,
   type Transaction,
-} from "../../domain/transaction.js";
+} from "../../domain/transaction";
 
 interface TransactionUseCases {
   addNewTransactionToBudget: (

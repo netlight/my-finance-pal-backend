@@ -1,8 +1,8 @@
-import { type NewTransactionDto, type TransactionDto } from "./transaction.js";
+import { type NewTransactionDto, type TransactionDto } from "./transaction";
 import {
   type NewTransaction,
   type Transaction,
-} from "../../../domain/transaction.js";
+} from "../../../domain/transaction";
 
 export const NewTransactionDtoConverter = {
   toDomain: (dto: NewTransactionDto): NewTransaction => ({
