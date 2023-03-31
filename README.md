@@ -1,43 +1,146 @@
-## About
+<a name="readme-top"></a>
 
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
-
-
-## Available Scripts
-
-### `npm run dev`
-
-Run the server in development mode.
-
-### `npm test`
-
-Run all unit-tests with hot-reloading.
-
-### `npm test -- --testFile="name of test file" (i.e. --testFile=Users).`
-
-Run a single unit-test.
-
-### `npm run test:no-reloading`
-
-Run all unit-tests without hot-reloading.
-
-### `npm run lint`
-
-Check for linting errors.
-
-### `npm run build`
-
-Build the project for production.
-
-### `npm start`
-
-Run the production build (Must be built first).
-
-### `npm start -- --environment="name of environment file" (default is production).`
-
-Run production build with a different environment file.
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-## Additional Notes
 
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+<h3 align="center">My Finance Pal</h3>
+
+  <p align="center">
+    Example Typescript Node.js webserivce showcasing best practices in software development
+    <br />
+    <a href="https://github.com/ungaralex/my-finance-pal-backend"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/ungaralex/my-finance-pal-backend/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/ungaralex/my-finance-pal-backend/issues">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+This is a standalone best practice web application developed for an engineering bootcamp
+for a lecture at the Technical University of Munich.
+
+Please bear in mind that also this is not a perfect version of an application as one would
+imagine it running in production in a real world scenario. However, we tried to incorporate
+as many best practices as possible, but as few as needed to get students, who are
+on a beginner level, started. The goal is to have this is a toolbox for developing a state-of-the
+art Node.js Typescript business application.
+
+**Don't take everything we do in this application literally. It is important to also always think
+for yourself and consider which of the presented techniques and frameworks you actually
+need for your use case!**
+
+At the end, we hope that this helps you on your journey on becoming an amazing software 
+developer and we hope you have fun exploring the universe of backend engineering :)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [![NodeJs][Nodejs]][Node-url]
+* [![Express.js][Expressjs]][Express-url]
+* [![Typescript][Typescript]][Typescript-url]
+* [![MongoDB][MongoDB]][Mongodb-url]
+* [![Jest][Jest]][Jest-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+In order to be able to start the service locally, follow these required steps.
+
+### Prerequisites
+
+Needed toolings and frameworks you should install before building the project
+* [Node.js](https://nodejs.org/en/download) (if not already installed)
+* Update npm
+  ```sh
+  npm install npm@latest -g
+  ```
+* Yarn
+   ```shell
+  npm install yarn -g
+  ```
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/ungaralex/my-finance-pal-backend.git
+   ```
+2. Install NPM packages
+   ```sh
+   yarn install
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[contributors-url]: https://github.com/ungaralex/my-finance-pal-backend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[forks-url]: https://github.com/ungaralex/my-finance-pal-backend/network/members
+[stars-shield]: https://img.shields.io/github/stars/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[stars-url]: https://github.com/ungaralex/my-finance-pal-backend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[issues-url]: https://github.com/ungaralex/my-finance-pal-backend/issues
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/alexander-ungar
+
+[Expressjs]: https://img.shields.io/badge/Express-grey?style=for-the-badge&logo=express&logoColor=red
+[Express-url]: https://expressjs.com/
+[Nodejs]: https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=nodedotjs&logoColor=green
+[Node-url]: https://nodejs.org/en
+[Typescript]: https://img.shields.io/badge/Typescript-white?style=for-the-badge&logo=typescript&logoColor=blue
+[Typescript-url]: https://www.typescriptlang.org/
+[MongoDB]: https://img.shields.io/badge/MongoDB-purple?style=for-the-badge&logo=mongodb&logoColor=green
+[Mongodb-url]: https://www.mongodb.com/
+[Jest]: https://img.shields.io/badge/Jest-orange?style=for-the-badge&logo=jest&logoColor=white
+[Jest-url]: https://jestjs.io/
