@@ -13,16 +13,11 @@ export const createExpense =
     const newExpenseDto = req.body;
     const budgetId: string = req.params.budgetId;
     const newExpense = NewExpenseDtoConverter.toDomain(newExpenseDto);
-    const expense = await addExpenseToBudget(
-      new UUID(budgetId),
-      newExpense
-    );
+    const expense = await addExpenseToBudget(new UUID(budgetId), newExpense);
     if (expense === undefined) {
       res.sendStatus(StatusCodes.NOT_FOUND);
     } else {
-      res
-        .status(StatusCodes.CREATED)
-        .json(ExpenseDtoConverter.toDto(expense));
+      res.status(StatusCodes.CREATED).json(ExpenseDtoConverter.toDto(expense));
     }
   };
 
