@@ -3,7 +3,6 @@ import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryR
 import type BudgetUseCases from "./budgetUseCases";
 import UUID from "../../domain/uuid";
 import type BudgetRepository from "../../repository/budget/budgetRepository";
-import budgetRepository from "../../repository/budget/budgetRepository";
 
 export const createBudget: (
   insertBudget: BudgetSummaryRepository["insert"]
