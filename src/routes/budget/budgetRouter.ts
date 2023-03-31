@@ -50,7 +50,7 @@ export const deleteBudget =
   async (req: Request, res: Response): Promise<void> => {
     const budgetId = new UUID(req.params.budgetId);
     const deleteResult = await deleteBudget(budgetId);
-    res.status(
+    res.sendStatus(
       deleteResult.deleted ? StatusCodes.NO_CONTENT : StatusCodes.NOT_FOUND
     );
   };
