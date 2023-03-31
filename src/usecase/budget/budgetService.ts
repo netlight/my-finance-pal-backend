@@ -3,6 +3,7 @@ import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryR
 import type BudgetUseCases from "./budgetUseCases";
 import UUID from "../../domain/uuid";
 import type BudgetRepository from "../../repository/budget/budgetRepository";
+import budgetRepository from "../../repository/budget/budgetRepository";
 
 export const createBudget: (
   insertBudget: BudgetSummaryRepository["insert"]
@@ -28,6 +29,13 @@ export const getBudgets: (
   return await findAll();
 };
 
+export const deleteBudget: (
+  deleteFromPersistence: BudgetRepository["delete"]
+) => BudgetUseCases["deleteBudget"] =
+  (deleteFromPersistence) => async (budgetId) => {
+    return await deleteFromPersistence(budgetId);
+  };
+
 const BudgetService: (
   budgetSummaryRepo: BudgetSummaryRepository,
   budgetRepo: BudgetRepository
@@ -35,6 +43,7 @@ const BudgetService: (
   createBudget: createBudget(budgetSummaryRepo.insert),
   getBudgetSummary: getBudgetSummary(budgetSummaryRepo.find),
   getBudgets: getBudgets(budgetRepo.findAll),
+  deleteBudget: deleteBudget(budgetRepo.delete),
 });
 
 export default BudgetService;

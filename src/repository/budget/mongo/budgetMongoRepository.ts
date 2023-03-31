@@ -7,8 +7,14 @@ export const findBudgets: BudgetRepository["findAll"] = async () => {
   return found.map(BudgetEntityConverter.toDomain);
 };
 
+export const deleteBudget: BudgetRepository["delete"] = async (budgetId) => {
+  const deleted = await BudgetSummaryModel.deleteOne({ id: budgetId.value });
+  return { deleted: deleted.deletedCount > 0 };
+};
+
 const BudgetMongoRepository = (): BudgetRepository => ({
   findAll: findBudgets,
+  delete: deleteBudget,
 });
 
 export default BudgetMongoRepository;

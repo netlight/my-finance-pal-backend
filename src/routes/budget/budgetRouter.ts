@@ -45,6 +45,16 @@ export const getBudgetSummary =
     }
   };
 
+export const deleteBudget =
+  (deleteBudget: BudgetUseCases["deleteBudget"]) =>
+  async (req: Request, res: Response): Promise<void> => {
+    const budgetId = new UUID(req.params.budgetId);
+    const deleteResult = await deleteBudget(budgetId);
+    res.status(
+      deleteResult.deleted ? StatusCodes.NO_CONTENT : StatusCodes.NOT_FOUND
+    );
+  };
+
 const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   const router = Router();
   router.post(
@@ -58,6 +68,10 @@ const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   router.get(
     toExpressPath(apiPaths.getBudgetSummary),
     asyncHandler(getBudgetSummary(budgetUseCases.getBudgetSummary))
+  );
+  router.delete(
+    toExpressPath(apiPaths.deleteBudget),
+    asyncHandler(deleteBudget(budgetUseCases.deleteBudget))
   );
 
   return router;
