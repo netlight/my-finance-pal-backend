@@ -7,8 +7,8 @@ import BudgetService from "./usecase/budget/budgetService";
 import { errorHandler } from "./middleware/errorHandler";
 import BudgetMongoRepository from "./repository/budget/mongo/budgetMongoRepository";
 import BudgetSummaryMongoRepository from "./repository/budget/mongo/budgetSummaryMongoRepository";
-import TransactionService from "./usecase/transaction/transactionService";
-import TransactionMongoRepository from "./repository/transaction/mongo/TransactionMongoRepository";
+import ExpenseService from "./usecase/expense/expenseService";
+import ExpenseMongoRepository from "./repository/expense/mongo/ExpenseMongoRepository";
 import * as OpenApiValidator from "express-openapi-validator";
 import * as path from "path";
 
@@ -34,8 +34,8 @@ const budgetUseCases = BudgetService(
   BudgetSummaryMongoRepository(),
   BudgetMongoRepository()
 );
-const transactionUseCases = TransactionService(TransactionMongoRepository());
-app.use(ApiRouter(budgetUseCases, transactionUseCases));
+const expenseUseCases = ExpenseService(ExpenseMongoRepository());
+app.use(ApiRouter(budgetUseCases, expenseUseCases));
 
 app.use(errorHandler);
 

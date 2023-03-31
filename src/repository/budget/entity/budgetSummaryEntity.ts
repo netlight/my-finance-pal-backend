@@ -1,4 +1,4 @@
-import type TransactionEntity from "../../transaction/entity/transactionEntity";
+import type ExpenseEntity from "../../expense/entity/expenseEntity";
 
 interface BudgetSummaryEntity {
   id: string;
@@ -7,7 +7,7 @@ interface BudgetSummaryEntity {
   spent: number;
   startDate?: Date;
   endDate?: Date;
-  transactions: TransactionEntity[];
+  expenses: ExpenseEntity[];
 }
 
 export default BudgetSummaryEntity;

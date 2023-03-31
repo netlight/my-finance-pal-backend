@@ -11,7 +11,7 @@ export const createBudget: (
     ...newBudget,
     id: new UUID(),
     spent: 0,
-    transactions: [],
+    expenses: [],
   };
   return await insertBudget(budgetSummary);
 };

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import type BudgetSummaryEntity from "../../entity/budgetSummaryEntity";
-import transactionSchema from "../../../transaction/mongo/schema/transactionSchema";
+import expenseSchema from "../../../expense/mongo/schema/expenseSchema";
 
 const Types = Schema.Types;
 
@@ -12,7 +12,7 @@ const budgetSummarySchema = new mongoose.Schema<BudgetSummaryEntity>(
     spent: Types.Number,
     startDate: Types.Date,
     endDate: Types.Date,
-    transactions: [transactionSchema],
+    expenses: [expenseSchema],
   },
   { strict: true, timestamps: true, versionKey: false }
 );

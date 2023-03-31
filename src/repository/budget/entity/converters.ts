@@ -3,7 +3,7 @@ import type BudgetSummaryEntity from "./budgetSummaryEntity";
 import UUID from "../../../domain/uuid";
 import Limit from "../../../domain/limit";
 import type BudgetEntity from "./budgetEntity";
-import { TransactionEntityConverter } from "../../transaction/entity/converters";
+import { ExpenseEntityConverter } from "../../expense/entity/converters";
 
 export const BudgetEntityConverter = {
   toDomain: (entity: BudgetEntity): Budget => ({
@@ -24,7 +24,7 @@ export const BudgetSummaryEntityConverter = {
     spent: domain.spent,
     startDate: domain.startDate,
     endDate: domain.endDate,
-    transactions: domain.transactions.map(TransactionEntityConverter.toEntity),
+    expenses: domain.expenses.map(ExpenseEntityConverter.toEntity),
   }),
   toDomain: (entity: BudgetSummaryEntity): BudgetSummary => ({
     id: new UUID(entity.id),
@@ -33,6 +33,6 @@ export const BudgetSummaryEntityConverter = {
     spent: entity.spent,
     startDate: entity.startDate,
     endDate: entity.endDate,
-    transactions: entity.transactions.map(TransactionEntityConverter.toDomain),
+    expenses: entity.expenses.map(ExpenseEntityConverter.toDomain),
   }),
 };

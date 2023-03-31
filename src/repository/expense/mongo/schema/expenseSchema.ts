@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import type TransactionEntity from "../../entity/transactionEntity";
+import type ExpenseEntity from "../../entity/expenseEntity";
 
 const Types = Schema.Types;
 
-const transactionSchema = new mongoose.Schema<TransactionEntity>(
+const expenseSchema = new mongoose.Schema<ExpenseEntity>(
   {
     id: Types.UUID,
     description: Types.String,
@@ -13,4 +13,4 @@ const transactionSchema = new mongoose.Schema<TransactionEntity>(
   { strict: true, _id: false }
 );
 
-export default transactionSchema;
+export default expenseSchema;

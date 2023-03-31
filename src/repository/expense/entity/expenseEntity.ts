@@ -1,8 +1,8 @@
-interface TransactionEntity {
+interface ExpenseEntity {
   id: string;
   description: string;
   amount: number;
   date: Date;
 }
 
-export default TransactionEntity;
+export default ExpenseEntity;

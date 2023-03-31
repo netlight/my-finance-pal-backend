@@ -4,8 +4,8 @@ info:
   title: My Finance Pal
   description: API of the personal finance budgeting app My Finance Pal
 tags:
-  - name: transactions
-    description: Transaction of budgets
+  - name: expenses
+    description: Expenses of budgets
   - name: budgets
     description: Managing budgets
 paths:
@@ -48,7 +48,7 @@ paths:
     get:
       tags:
         - budgets
-      description: Get a budget summary including all transactions for a given ID
+      description: Get a budget summary including all expenses for a given ID
       operationId: getBudgetSummary
       parameters:
         - in: path
@@ -70,7 +70,7 @@ paths:
     delete:
       tags:
         - budgets
-      description: Delete a budget including all transactions
+      description: Delete a budget including all expenses
       operationId: deleteBudget
       parameters:
         - in: path
@@ -84,12 +84,12 @@ paths:
           description: Budget successfully deleted
         404:
           description: Budget not found
-  /budgets/{budgetId}/transactions:
+  /budgets/{budgetId}/expenses:
     post:
       tags:
-        - transactions
-      description: Register a new transaction for a budget
-      operationId: createTransaction
+        - expenses
+      description: Register a new expense for a budget
+      operationId: createExpense
       parameters:
         - $ref: "#/components/parameters/BudgetIdParam"
       requestBody:
@@ -97,14 +97,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewTransaction"
+              $ref: "#/components/schemas/NewExpense"
       responses:
         201:
-          description: Transaction created
+          description: Expense created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Transaction"
+                $ref: "#/components/schemas/Expense"
         404:
           description: Budget not found
 
@@ -117,13 +117,13 @@ components:
       description: The UUID of the budget
       schema:
         $ref: "#/components/schemas/BudgetId"
-    TransactionIdParam:
+    ExpenseIdParam:
       in: path
-      name: transactionId
+      name: expenseId
       required: true
-      description: The UUID of the transaction
+      description: The UUID of the expense
       schema:
-        $ref: "#/components/schemas/TransactionId"
+        $ref: "#/components/schemas/ExpenseId"
   schemas:
     BudgetId:
       type: string
@@ -153,7 +153,7 @@ components:
         spent:
           type: number
           minimum: 0
-          description: The summed up spent amount of all transaction of that budget
+          description: The summed up spent amount of all expenses of that budget
         startDate:
           type: string
           format: date
@@ -166,13 +166,13 @@ components:
           example: 2023-04-30
     BudgetSummary:
       type: object
-      description: Summary of the whole budget including all transactions
+      description: Summary of the whole budget including all expenses
       required:
         - id
         - name
         - limit
         - spent
-        - transactions
+        - expenses
       properties:
         id:
           $ref: "#/components/schemas/BudgetId"
@@ -199,11 +199,11 @@ components:
           format: date
           description: Date marking the end of the budget period
           example: 2023-04-30
-        transactions:
+        expenses:
           type: array
-          description: All transactions of the budget
+          description: All expenses of the budget
           items:
-            $ref: "#/components/schemas/Transaction"
+            $ref: "#/components/schemas/Expense"
     NewBudget:
       type: object
       description: Budget to be created
@@ -230,14 +230,14 @@ components:
           format: date
           description: Date marking the end of the budget period
           example: 2023-04-30
-    TransactionId:
+    ExpenseId:
       type: string
       format: uuid
-      description: Unique identifier of a transaction
+      description: Unique identifier of a expense
       example: cfd3b0b7-bf5e-43d4-8341-940d5e07487d
-    Transaction:
+    Expense:
       type: object
-      description: An expense or income related to a single budget
+      description: An expense related to a single budget
       required:
         - id
         - description
@@ -245,21 +245,21 @@ components:
         - date
       properties:
         id:
-          $ref: "#/components/schemas/TransactionId"
+          $ref: "#/components/schemas/ExpenseId"
         description:
           type: string
-          description: Description of the transaction
+          description: Description of the expense
           example: Healthy breakfast at Five Guys
         amount:
           type: number
-          description: Amount of money contained in the transaction
+          description: Amount of money contained in the expense
           example: 23.94
         date:
           type: string
           format: date-time
-    NewTransaction:
+    NewExpense:
       type: object
-      description: A new transaction to be created
+      description: A new expense to be created
       required:
         - description
         - amount
@@ -267,11 +267,11 @@ components:
       properties:
         description:
           type: string
-          description: Description of the transaction
+          description: Description of the expense
           example: Healthy breakfast at Five Guys
         amount:
           type: number
-          description: Amount of money contained in the transaction
+          description: Amount of money contained in the expense
           example: 23.94
         date:
           type: string

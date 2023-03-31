@@ -10,7 +10,7 @@ import {
   type BudgetSummaryDto,
   type NewBudgetDto,
 } from "./budget";
-import { TransactionDtoConverter } from "../../transaction/dto/converters";
+import { ExpenseDtoConverter } from "../../expense/dto/converters";
 
 export const NewBudgetDtoConverter = {
   toDomain: (dto: NewBudgetDto): NewBudget => ({
@@ -40,6 +40,6 @@ export const BudgetSummaryDtoConverter = {
     name: domain.name,
     startDate: toIsoDate(domain.startDate),
     endDate: toIsoDate(domain.endDate),
-    transactions: domain.transactions.map(TransactionDtoConverter.toDto),
+    expenses: domain.expenses.map(ExpenseDtoConverter.toDto),
   }),
 };

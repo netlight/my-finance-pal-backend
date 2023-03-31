@@ -1,6 +1,6 @@
 import type UUID from "./uuid";
 import type Limit from "./limit";
-import { type Transaction } from "./transaction";
+import { type Expense } from "./expense";
 
 export type BudgetId = UUID;
 
@@ -17,5 +17,5 @@ export interface Budget extends NewBudget {
 }
 
 export interface BudgetSummary extends Budget {
-  transactions: Transaction[];
+  expenses: Expense[];
 }

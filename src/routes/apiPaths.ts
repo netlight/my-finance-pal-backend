@@ -5,7 +5,7 @@ const apiPaths: Record<keyof operations, keyof paths> = {
   getBudgets: "/budgets",
   getBudgetSummary: "/budgets/{budgetId}/summary",
   deleteBudget: "/budgets/{budgetId}",
-  createTransaction: "/budgets/{budgetId}/transactions",
+  createExpense: "/budgets/{budgetId}/expenses",
 };
 
 export default apiPaths;
