@@ -131,79 +131,33 @@ components:
       description: Unique identifier of one budget
       example: 850963b9-a04d-4698-b767-c0a0096b37c5
     Budget:
-      type: object
-      description: Planned money to be available for tracking expenses related to a certain purpose over a period of time
-      required:
-        - id
-        - name
-        - limit
-        - spent
-      properties:
-        id:
-          $ref: "#/components/schemas/BudgetId"
-        name:
-          type: string
-          description: The name of the budget
-          example: Takeout
-        limit:
-          type: number
-          minimum: 0
-          description: The total amount available for the budget
-          example: 250
-        spent:
-          type: number
-          minimum: 0
-          description: The summed up spent amount of all expenses of that budget
-        startDate:
-          type: string
-          format: date
-          description: Date marking the start of the budget period
-          example: 2023-04-01
-        endDate:
-          type: string
-          format: date
-          description: Date marking the end of the budget period
-          example: 2023-04-30
+      allOf:
+        - type: object
+          description: Planned money to be available for tracking expenses related to a certain purpose over a period of time
+          required:
+            - id
+            - spent
+          properties:
+            id:
+              $ref: "#/components/schemas/BudgetId"
+            spent:
+              type: number
+              minimum: 0
+              description: The summed up spent amount of all transaction of that budget
+        - $ref: "#/components/schemas/NewBudget"
     BudgetSummary:
-      type: object
-      description: Summary of the whole budget including all expenses
-      required:
-        - id
-        - name
-        - limit
-        - spent
-        - expenses
-      properties:
-        id:
-          $ref: "#/components/schemas/BudgetId"
-        name:
-          type: string
-          description: The name of the budget
-          example: Takeout
-        limit:
-          type: number
-          minimum: 0
-          description: The total amount available for the budget
-          example: 250
-        spent:
-          type: number
-          minimum: 0
-          description: The summed up spent amount of all transaction of that budget
-        startDate:
-          type: string
-          format: date
-          description: Date marking the start of the budget period
-          example: 2023-04-01
-        endDate:
-          type: string
-          format: date
-          description: Date marking the end of the budget period
-          example: 2023-04-30
-        expenses:
-          type: array
-          description: All expenses of the budget
-          items:
-            $ref: "#/components/schemas/Expense"
+      allOf:
+        - $ref: "#/components/schemas/Budget"
+        - type: object
+          description: Summary of the whole budget including all expenses
+          required:
+            - expenses
+          properties:
+            expenses:
+              type: array
+              description: All expenses of the budget
+              items:
+                $ref: "#/components/schemas/Expense"
     NewBudget:
       type: object
       description: Budget to be created
@@ -236,27 +190,15 @@ components:
       description: Unique identifier of a expense
       example: cfd3b0b7-bf5e-43d4-8341-940d5e07487d
     Expense:
-      type: object
-      description: An expense related to a single budget
-      required:
-        - id
-        - description
-        - amount
-        - date
-      properties:
-        id:
-          $ref: "#/components/schemas/ExpenseId"
-        description:
-          type: string
-          description: Description of the expense
-          example: Healthy breakfast at Five Guys
-        amount:
-          type: number
-          description: Amount of money contained in the expense
-          example: 23.94
-        date:
-          type: string
-          format: date-time
+      allOf:
+        - $ref: "#/components/schemas/NewExpense"
+        - type: object
+          description: An expense related to a single budget
+          required:
+            - id
+          properties:
+            id:
+              $ref: "#/components/schemas/ExpenseId"
     NewExpense:
       type: object
       description: A new expense to be created
@@ -272,6 +214,7 @@ components:
         amount:
           type: number
           description: Amount of money contained in the expense
+          minimum: 0
           example: 23.94
         date:
           type: string
