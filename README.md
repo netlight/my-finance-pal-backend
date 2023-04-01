@@ -122,6 +122,21 @@ Needed toolings and frameworks you should install before building the project
    yarn install
    ```
 
+### Run Locally
+
+To run/debug the service locally in dev mode, only the following is needed:
+
+1. Start the `mongo` service of the `docker-compose` file
+   ```shell
+    docker-compose up -d mongo
+   ```
+2. Start the `my-finance-pal` service.
+   ```shell
+   yarn dev
+   ```
+   
+The service now runs on port 3000 and listens to requests
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
