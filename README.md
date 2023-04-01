@@ -70,6 +70,12 @@ need for your use case!**
 At the end, we hope that this helps you on your journey on becoming an amazing software 
 developer and we hope you have fun exploring the universe of backend engineering :)
 
+**Disclaimer: A lot of the standard Node.js/Express code was to some parts inspired, to some
+copied over from [PracticaJS](https://github.com/practicajs/practica). Please have a look at their work and
+examples as it gives you a great starting point and references when it comes to best practices
+with Node.js development. Also have a look at the [Express Typescript Generator](https://www.npmjs.com/package/express-generator-typescript),
+which we also used to create the initial setup of our app.**
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
