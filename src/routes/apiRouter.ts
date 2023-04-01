@@ -4,6 +4,7 @@ import type BudgetUseCases from "../usecase/budget/budgetUseCases";
 import ExpenseRouter from "./expense/expenseRouter";
 import type ExpenseUseCases from "../usecase/expense/expenseUseCases";
 
+// Express router bundling all individual routes of our app
 const ApiRouter = (
   budgetUseCases: BudgetUseCases,
   expenseUseCases: ExpenseUseCases

@@ -18,6 +18,16 @@ const addNewExpenseToBudget: (
       id: new UUID(),
     };
     const updatedSpent = calculateSpent(existingExpenses, expense);
+
+    /*
+    Here we could also check if updatedSpent > budget.limit, but
+    we will omit this for now. It might also be a valid use case
+    that one spends more than they set as their limit
+    ==> clarification with business required
+    The same goes for a transaction date, that is not within the
+    boundaries of the budget.
+     */
+
     return await insert(budgetId, updatedSpent, expense);
   };
 

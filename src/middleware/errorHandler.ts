@@ -3,6 +3,8 @@ import logger from "../logging/logger";
 import * as util from "util";
 import { type NextFunction, type Request, type Response } from "express";
 
+// This whole handling logic is copied from https://github.com/practicajs/practica was and modified to fit our application
+
 let httpServerRef: Http.Server;
 
 export class AppError extends Error {
