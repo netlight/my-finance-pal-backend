@@ -5,5 +5,5 @@ import type BudgetSummaryEntity from "../entity/budgetSummaryEntity";
 export const BudgetSummaryModel = mongoose.model<BudgetSummaryEntity>(
   "BudgetSummary",
   budgetSummarySchema,
-  "budgets"
+  "budget-summaries"
 );
