@@ -8,6 +8,7 @@
 import dotenv from "dotenv";
 import { parse } from "ts-command-line-args";
 import path from "path";
+import * as process from "process";
 
 // **** Types **** //
 
@@ -21,7 +22,7 @@ interface Args {
 const args = parse<Args>({
   env: {
     type: String,
-    defaultValue: "development",
+    defaultValue: process.env.NODE_ENV ?? "development",
     alias: "e",
   },
 });

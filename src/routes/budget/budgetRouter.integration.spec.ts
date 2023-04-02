@@ -1,15 +1,13 @@
 import { type BudgetDto, type NewBudgetDto } from "./dto/budget";
 import mongoose from "mongoose";
-import env from "../../config/environment";
 import request from "supertest";
 import app from "../../app";
+import mongoDb from "../../config/mongoDb";
 
 describe("budgetRouter", () => {
   beforeEach(async () => {
     try {
-      await mongoose.connect(env.DATABASE_CONNECTION_STRING, {
-        dbName: env.DATABASE_NAME,
-      });
+      await mongoDb.connect();
     } catch (error) {
       console.log(error);
     }
