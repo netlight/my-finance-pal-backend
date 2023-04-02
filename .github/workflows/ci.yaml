@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: yarn install
+
+      - run: yarn build
+
+      - run: yarn test
+
+  cloud_build:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - run: |
+          gcloud builds submit \
+            --region=${{ secrets.GCP_REGION }} \
+            --config cloudbuild.yaml \
+            --substitutions=_FULL_IMAGE_NAME=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/my-finance-pal,_IMAGE_TAG=${{ github.sha }} \
+            .
