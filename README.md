@@ -66,7 +66,7 @@ art Node.js Typescript business application.
 for yourself and consider which of the presented techniques and frameworks you actually
 need for your use case!**
 
-At the end, we hope that this helps you on your journey on becoming an amazing software 
+At the end, we hope that this helps you on your journey on becoming an amazing software
 developer and we hope you have fun exploring the universe of backend engineering :)
 
 **Disclaimer: A lot of the standard Node.js/Express code was to some parts inspired, to some
@@ -100,24 +100,38 @@ In order to be able to start the service locally, follow these required steps.
 
 ### Prerequisites
 
-Needed toolings and frameworks you should install before building the project
+Needed toolings and frameworks you should install before building the project:
+
 * [Node.js](https://nodejs.org/en/download) (if not already installed)
+
 * Update npm
+
   ```sh
   npm install npm@latest -g
   ```
+
 * Yarn
-   ```shell
+
+  ```shell
   npm install yarn -g
+  ```
+
+* GitHub CLI (optional but recommended)
+
+  ```shell
+  brew install gh
   ```
 
 ### Installation
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/ungaralex/my-finance-pal-backend.git
    ```
+
 2. Install NPM packages
+
    ```sh
    yarn install
    ```
@@ -127,14 +141,17 @@ Needed toolings and frameworks you should install before building the project
 To run/debug the service locally in dev mode, only the following is needed:
 
 1. Start the `mongo` service of the `docker-compose` file
+
    ```shell
     docker-compose up -d mongo
    ```
+
 2. Start the `my-finance-pal` service.
+
    ```shell
    yarn dev
    ```
-   
+
 The service now runs on port 3000 and listens to requests
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -164,3 +181,22 @@ The service now runs on port 3000 and listens to requests
 [Mongodb-url]: https://www.mongodb.com/
 [Jest]: https://img.shields.io/badge/Jest-orange?style=for-the-badge&logo=jest&logoColor=white
 [Jest-url]: https://jestjs.io/
+
+## CI/CD Pipelines Using GitHub Actions
+
+## Authenticating to GCP using a Service Account Key
+
+TODO: add details
+
+### Populating Secrets
+
+The GCP service account key need to be stored as a secret in the GitHub repo. Alongside, we store a few other GCP-related
+configuration values, such as project ID and region. Secrets can be accessed in the GitHub Actions workflows.
+
+We advise using `gh` to create the secrets:
+
+```shell
+gh secret set GCP_PROJECT_ID --body '<gcp_project_id>'
+gh secret set GCP_REGION --body '<gcp_region>'
+gh secret set GCP_SA_KEY --body $(cat <gpc_service_account_key.json> | base64)
+```
