@@ -79,6 +79,7 @@
     "moduleDirectories": [
       "node_modules",
       "src"
-    ]
+    ],
+    "setupFiles": ["./src/preStart.ts"]
   }
 }
