@@ -17,6 +17,7 @@ services:
       - DATABASE_CONNECTION_STRING=mongodb://mongo:27017
     depends_on:
       - mongo
+    entrypoint: node dist/src/server.js -e development
 
 volumes:
   mongo_volume:
