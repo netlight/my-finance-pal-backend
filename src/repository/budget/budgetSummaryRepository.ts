@@ -1,7 +1,7 @@
 import { type BudgetId, type BudgetSummary } from "../../domain/budget";
 
 interface BudgetSummaryRepository {
-  // TODO 3. add insert function
+  insert: (budgetSummary: BudgetSummary) => Promise<BudgetSummary>;
   find: (budgetId: BudgetId) => Promise<BudgetSummary | undefined>;
 }
 
