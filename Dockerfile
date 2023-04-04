@@ -1,27 +1,19 @@
-FROM node:18-alpine3.17 as build
+FROM node:18-alpine3.17
 
 WORKDIR /app
-
-COPY package.json yarn.lock ./
-RUN yarn install
-
 
 COPY src ./src
 COPY api ./api
-COPY env ./env
 COPY tsconfig.json ./tsconfig.json
 COPY tsconfig.prod.json ./tsconfig.prod.json
+COPY package.json yarn.lock ./
+
+RUN yarn install
 
 RUN yarn run build
 
-FROM node:18-alpine3.17 as app
+COPY env ./dist/env
 
 USER node
-WORKDIR /app
-
-COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/env /app/dist/env
-COPY --from=build /app/package.json /app/package.json
-COPY --from=build /app/dist /app/dist
 
 ENTRYPOINT node dist/src/server.js -e production
