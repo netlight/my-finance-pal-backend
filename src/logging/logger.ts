@@ -7,16 +7,14 @@ const logger = winston.createLogger({
   defaultMeta: { service: "my-finance-pal" },
 });
 
-if (!environment.isProd) {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize({ all: true }),
-        winston.format.simple()
-      ),
-    })
-  );
-}
+logger.add(
+  new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize({ all: true }),
+      winston.format.simple()
+    ),
+  })
+);
 
 /*
 For production we are still missing a log aggregation stack as well
