@@ -13,7 +13,8 @@
     "build": "run-s clean generate-api-types compile copy-resources",
     "lint": "eslint --ext .ts src/",
     "dev": "nodemon src/server.ts",
-    "test": "jest"
+    "test:unit": "jest --config \"jest.config.unit.ts\"",
+    "test:integration": "jest --config \"jest.config.integration.ts\""
   },
   "dependencies": {
     "@types/supertest": "^2.0.12",
@@ -60,26 +61,5 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.3"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/src/"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "setupFiles": ["./src/preStart.ts"]
   }
 }

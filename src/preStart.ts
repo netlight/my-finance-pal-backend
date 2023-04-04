@@ -19,13 +19,16 @@ interface Args {
 // **** Setup **** //
 
 // Command line arguments
-const args = parse<Args>({
-  env: {
-    type: String,
-    defaultValue: process.env.NODE_ENV ?? "development",
-    alias: "e",
+const args = parse<Args>(
+  {
+    env: {
+      type: String,
+      defaultValue: process.env.NODE_ENV ?? "development",
+      alias: "e",
+    },
   },
-});
+  { partial: true }
+);
 
 // Set the env file
 const dotenvConfig = dotenv.config({
