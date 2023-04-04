@@ -2,7 +2,7 @@ import { type operations, type paths } from "../../generated/api";
 
 // Typesafe constant holding all REST endpoint paths based on the OpenAPI specification
 const apiPaths: Record<keyof operations, keyof paths> = {
-  createBudget: "/budgets",
+  // TODO 9. add createBudget endpoint
   getBudgets: "/budgets",
   getBudgetSummary: "/budgets/{budgetId}/summary",
   deleteBudget: "/budgets/{budgetId}",

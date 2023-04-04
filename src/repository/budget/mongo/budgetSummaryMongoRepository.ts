@@ -3,14 +3,7 @@ import { BudgetSummaryEntityConverter } from "../entity/converters";
 import { type BudgetId } from "../../../domain/budget";
 import { BudgetSummaryModel } from "./models";
 
-export const insertBudgetSummary: BudgetSummaryRepository["insert"] = async (
-  summary
-) => {
-  const summaryEntity = BudgetSummaryEntityConverter.toEntity(summary);
-  const summaryModel = new BudgetSummaryModel(summaryEntity);
-  const updatedSummary = await summaryModel.save();
-  return BudgetSummaryEntityConverter.toDomain(updatedSummary);
-};
+// TODO 4. add insertBudgetSummary function
 
 export const findBudgetSummary: BudgetSummaryRepository["find"] = async (
   budgetId: BudgetId
@@ -22,7 +15,7 @@ export const findBudgetSummary: BudgetSummaryRepository["find"] = async (
 };
 
 const BudgetSummaryMongoRepository = (): BudgetSummaryRepository => ({
-  insert: insertBudgetSummary,
+  // TODO 5. add insertBudgetSummary to repository
   find: findBudgetSummary,
 });
 
