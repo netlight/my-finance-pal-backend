@@ -10,26 +10,7 @@ tags:
     description: Managing budgets
 paths:
   /budgets:
-    post:
-      tags:
-        - budgets
-      description: Create a new budget
-      operationId: createBudget
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewBudget"
-      responses:
-        201:
-          description: Budget created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Budget"
-        400:
-          description: Invalid budget
+    # TODO 1. add createBudget endpoint
     get:
       tags:
         - budgets
