@@ -21,6 +21,7 @@ describe("budgetService", () => {
     const insertedBudgetSummary = await createBudgetUseCase(newBudget);
 
     // THEN
+    expect(insertBudgetMock).toBeCalledWith(expect.objectContaining(newBudget));
     expect(insertedBudgetSummary).toEqual(
       expect.objectContaining(expectedBudget)
     );
