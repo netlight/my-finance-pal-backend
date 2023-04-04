@@ -1,20 +1,35 @@
-import { type BudgetSummary } from "../../domain/budget";
 import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryRepository";
 import type BudgetUseCases from "./budgetUseCases";
-import UUID from "../../domain/uuid";
 import type BudgetRepository from "../../repository/budget/budgetRepository";
+import { type Budget, type BudgetSummary } from "../../domain/budget";
+import UUID from "../../domain/uuid";
 
-export const createBudget: (
-  insertBudget: BudgetSummaryRepository["insert"]
-) => BudgetUseCases["createBudget"] = (insertBudget) => async (newBudget) => {
-  const budgetSummary: BudgetSummary = {
-    ...newBudget,
-    id: new UUID(),
-    spent: 0,
-    expenses: [],
+type CreateBudgetUseCase = (
+  insertBudgetSummary: BudgetSummaryRepository["insert"]
+) => BudgetUseCases["createBudget"];
+
+export const createBudget: CreateBudgetUseCase =
+  (insertBudgetSummary) => async (newBudget) => {
+    // We could also create a class for our domain objects and put functionalities s.a.
+    // Budget.createFrom(newBudget) and BudgetSummary.getBudget() there
+    let budgetSummary: BudgetSummary = {
+      ...newBudget,
+      id: new UUID(),
+      spent: 0,
+      expenses: [],
+    };
+    budgetSummary = await insertBudgetSummary(budgetSummary);
+    const createdBudget: Budget = {
+      id: budgetSummary.id,
+      spent: budgetSummary.spent,
+      name: budgetSummary.name,
+      limit: budgetSummary.limit,
+      startDate: budgetSummary.startDate,
+      endDate: budgetSummary.endDate,
+    };
+
+    return createdBudget;
   };
-  return await insertBudget(budgetSummary);
-};
 
 export const getBudgetSummary: (
   findBudget: BudgetSummaryRepository["find"]
