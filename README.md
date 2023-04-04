@@ -81,8 +81,6 @@ which we also used to create the initial setup of our app.**
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [![NodeJs][Nodejs]][Node-url]
 * [![Express.js][Expressjs]][Express-url]
 * [![Typescript][Typescript]][Typescript-url]
