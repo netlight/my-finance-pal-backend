@@ -12,15 +12,18 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' }}
 
     steps:
-      - uses: google-github-actions/auth@v1
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-      - uses: google-github-actions/setup-gcloud@v1
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - run: |
+      - name: Deploy app to Cloud Run
+        run: |
           gcloud run deploy my-finance-pal \
             --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/my-finance-pal:${{ github.sha }} \
             --allow-unauthenticated \
