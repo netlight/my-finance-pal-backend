@@ -176,14 +176,14 @@ gh secret set GCP_SA_KEY --body $(cat <gpc_service_account_key.json> | base64)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[contributors-url]: https://github.com/ungaralex/my-finance-pal-backend/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[forks-url]: https://github.com/ungaralex/my-finance-pal-backend/network/members
+[contributors-shield]: https://img.shields.io/github/contributors/netlight/my-finance-pal-backend.svg?style=for-the-badge
+[contributors-url]: https://github.com/netlight/my-finance-pal-backend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/netlight/my-finance-pal-backend.svg?style=for-the-badge
+[forks-url]: https://github.com/netlight/my-finance-pal-backend/network/members
 [stars-shield]: https://img.shields.io/github/stars/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[stars-url]: https://github.com/ungaralex/my-finance-pal-backend/stargazers
+[stars-url]: https://github.com/netlight/my-finance-pal-backend/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[issues-url]: https://github.com/ungaralex/my-finance-pal-backend/issues
+[issues-url]: https://github.com/netlight/my-finance-pal-backend/issues
 [linkedin-shield-alex]: https://img.shields.io/badge/-Alexander%20Ungar-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-shield-saadi]: https://img.shields.io/badge/-Saadi%20Myftija-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-shield-arda]: https://img.shields.io/badge/-Arda%20Özdere-black.svg?style=for-the-badge&logo=linkedin&colorB=555
