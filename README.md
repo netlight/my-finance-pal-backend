@@ -5,8 +5,9 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
+[![LinkedIn][linkedin-shield-alex]][linkedin-url-alex]
+[![LinkedIn][linkedin-shield-saadi]][linkedin-url-saadi]
+[![LinkedIn][linkedin-shield-arda]][linkedin-url-arda]
 
 
 <!-- PROJECT LOGO -->
@@ -154,32 +155,6 @@ The service now runs on port 3000 and listens to requests
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[contributors-url]: https://github.com/ungaralex/my-finance-pal-backend/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[forks-url]: https://github.com/ungaralex/my-finance-pal-backend/network/members
-[stars-shield]: https://img.shields.io/github/stars/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[stars-url]: https://github.com/ungaralex/my-finance-pal-backend/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
-[issues-url]: https://github.com/ungaralex/my-finance-pal-backend/issues
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/alexander-ungar
-
-[Expressjs]: https://img.shields.io/badge/Express-grey?style=for-the-badge&logo=express&logoColor=red
-[Express-url]: https://expressjs.com/
-[Nodejs]: https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=nodedotjs&logoColor=green
-[Node-url]: https://nodejs.org/en
-[Typescript]: https://img.shields.io/badge/Typescript-white?style=for-the-badge&logo=typescript&logoColor=blue
-[Typescript-url]: https://www.typescriptlang.org/
-[MongoDB]: https://img.shields.io/badge/MongoDB-purple?style=for-the-badge&logo=mongodb&logoColor=green
-[Mongodb-url]: https://www.mongodb.com/
-[Jest]: https://img.shields.io/badge/Jest-orange?style=for-the-badge&logo=jest&logoColor=white
-[Jest-url]: https://jestjs.io/
-
 ## CI/CD Pipelines Using GitHub Actions
 
 ## Authenticating to GCP using a Service Account Key
@@ -198,3 +173,31 @@ gh secret set GCP_PROJECT_ID --body '<gcp_project_id>'
 gh secret set GCP_REGION --body '<gcp_region>'
 gh secret set GCP_SA_KEY --body $(cat <gpc_service_account_key.json> | base64)
 ```
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[contributors-url]: https://github.com/ungaralex/my-finance-pal-backend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[forks-url]: https://github.com/ungaralex/my-finance-pal-backend/network/members
+[stars-shield]: https://img.shields.io/github/stars/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[stars-url]: https://github.com/ungaralex/my-finance-pal-backend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ungaralex/my-finance-pal-backend.svg?style=for-the-badge
+[issues-url]: https://github.com/ungaralex/my-finance-pal-backend/issues
+[linkedin-shield-alex]: https://img.shields.io/badge/-Alexander%20Ungar-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield-saadi]: https://img.shields.io/badge/-Saadi%20Myftija-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield-arda]: https://img.shields.io/badge/-Arda%20Özdere-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url-alex]: https://www.linkedin.com/in/alexander-ungar
+[linkedin-url-saadi]: https://www.linkedin.com/in/saadimyftija
+[linkedin-url-arda]: https://www.linkedin.com/in/arda-%C3%B6zdere-85058a91
+
+[Expressjs]: https://img.shields.io/badge/Express-grey?style=for-the-badge&logo=express&logoColor=red
+[Express-url]: https://expressjs.com/
+[Nodejs]: https://img.shields.io/badge/Node.js-black?style=for-the-badge&logo=nodedotjs&logoColor=green
+[Node-url]: https://nodejs.org/en
+[Typescript]: https://img.shields.io/badge/Typescript-white?style=for-the-badge&logo=typescript&logoColor=blue
+[Typescript-url]: https://www.typescriptlang.org/
+[MongoDB]: https://img.shields.io/badge/MongoDB-purple?style=for-the-badge&logo=mongodb&logoColor=green
+[Mongodb-url]: https://www.mongodb.com/
+[Jest]: https://img.shields.io/badge/Jest-orange?style=for-the-badge&logo=jest&logoColor=white
+[Jest-url]: https://jestjs.io/
