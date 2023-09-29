@@ -4,11 +4,9 @@ import type BudgetRepository from "../../repository/budget/budgetRepository";
 import { type Budget, type BudgetSummary } from "../../domain/budget";
 import UUID from "../../domain/uuid";
 
-type CreateBudgetUseCase = (
+export const createBudget: (
   insertBudgetSummary: BudgetSummaryRepository["insert"]
-) => BudgetUseCases["createBudget"];
-
-export const createBudget: CreateBudgetUseCase =
+) => BudgetUseCases["createBudget"] =
   (insertBudgetSummary) => async (newBudget) => {
     // We could also create a class for our domain objects and put functionalities s.a.
     // Budget.createFrom(newBudget) and BudgetSummary.getBudget() there
