@@ -5,7 +5,7 @@ import { type Budget, type BudgetSummary } from "../../domain/budget";
 import UUID from "../../domain/uuid";
 
 export const createBudget: (
-  insertBudgetSummary: BudgetSummaryRepository["insert"]
+  insertBudgetSummary: BudgetSummaryRepository["insert"],
 ) => BudgetUseCases["createBudget"] =
   (insertBudgetSummary) => async (newBudget) => {
     // We could also create a class for our domain objects and put functionalities s.a.
@@ -30,19 +30,19 @@ export const createBudget: (
   };
 
 export const getBudgetSummary: (
-  findBudget: BudgetSummaryRepository["find"]
+  findBudget: BudgetSummaryRepository["find"],
 ) => BudgetUseCases["getBudgetSummary"] = (findBudget) => async (budgetId) => {
   return await findBudget(budgetId);
 };
 
 export const getBudgets: (
-  findBudgets: BudgetRepository["findAll"]
+  findBudgets: BudgetRepository["findAll"],
 ) => BudgetUseCases["getBudgets"] = (findAll) => async () => {
   return await findAll();
 };
 
 export const deleteBudget: (
-  deleteFromPersistence: BudgetRepository["delete"]
+  deleteFromPersistence: BudgetRepository["delete"],
 ) => BudgetUseCases["deleteBudget"] =
   (deleteFromPersistence) => async (budgetId) => {
     return await deleteFromPersistence(budgetId);
@@ -50,7 +50,7 @@ export const deleteBudget: (
 
 const BudgetService: (
   budgetSummaryRepo: BudgetSummaryRepository,
-  budgetRepo: BudgetRepository
+  budgetRepo: BudgetRepository,
 ) => BudgetUseCases = (budgetSummaryRepo, budgetRepo) => ({
   createBudget: createBudget(budgetSummaryRepo.insert),
   getBudgetSummary: getBudgetSummary(budgetSummaryRepo.find),
