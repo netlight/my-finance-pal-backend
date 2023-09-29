@@ -1,14 +1,12 @@
 import type ExpenseRepository from "../expenseRepository";
 import { ExpenseEntityConverter } from "../entity/converters";
 import { BudgetSummaryModel } from "../../budget/mongo/models";
-import type BudgetSummaryEntity from "../../budget/entity/budgetSummaryEntity";
 
 export const findAllExpensesForBudget: ExpenseRepository["findAllForBudget"] =
   async (budgetId) => {
-    const budgetExpenses: Pick<BudgetSummaryEntity, "expenses"> | null =
-      await BudgetSummaryModel.findOne({
-        id: budgetId.value,
-      }).select("expenses");
+    const budgetExpenses = await BudgetSummaryModel.findOne({
+      id: budgetId.value,
+    }).select("expenses");
     if (budgetExpenses !== null) {
       return budgetExpenses.expenses.map(ExpenseEntityConverter.toDomain);
     }
