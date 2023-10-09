@@ -155,24 +155,101 @@ The service now runs on port 3000 and listens to requests
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## CI/CD Pipelines Using GitHub Actions
+## Google Cloud Platform (GCP) Infrastructure
 
-## Authenticating to GCP using a Service Account Key
+We use [Cloud Run](https://cloud.google.com/run). It is a serverless platform for deploying containerized applications.
+Besides Cloud Run, there are a few other supporting GCP services that we use, such as Cloud Build and Artifact Registry.
 
-TODO: add details
+This section briefly describes how to setup the infrastructure resources using the `gcloud` CLI. For a production-ready setup,
+we strongly recommend not using the CLI, but rather adopting an Infrastructure-as-Code approach, e.g. using [Terraform](https://www.terraform.io/). For the scope of this demo application, the CLI is sufficient.
 
-### Populating Secrets
+### Infrastructure Setup Prerequisites
 
-The GCP service account key need to be stored as a secret in the GitHub repo. Alongside, we store a few other GCP-related
-configuration values, such as project ID and region. Secrets can be accessed in the GitHub Actions workflows.
+1. Open an account on GCP.
+2. Create a new project on GCP.
+3. Install the [gcloud CLI](https://cloud.google.com/sdk/docs/install).
+4. Authenticate to GCP using: `gcloud auth login`.
 
-We advise using `gh` to create the secrets:
+### Setup Steps
+
+Start by setting the project ID:
+
+`gcloud config set project <GCP_PROJECT_ID>`
+
+Next, we'll enable a few services:
+
+`gcloud services enable cloudbuild.googleapis.com artifactregistry.googleapis.com run.googleapis.com`
+
+* `cloudbuild.googleapis.com` -> [Cloud Build](https://cloud.google.com/build), used to build the container images
+* `artifactregistry.googleapis.com` -> [Artifact Registry](https://cloud.google.com/artifact-registry), used to store the container images
+* `run.googleapis.com` -> [Cloud Run](https://cloud.google.com/run), used to deploy the container images
+
+Once that is done, we'll create an artifact repository to store the container images:
+
+`gcloud artifacts repositories create --location <GCP_REGION> cloud-run-builds --repository-format docker`
+
+Don't forget to replace the `<GCP_REGION>` placeholder with a region of your choice, e.g. europe-west1.
+
+Now, we create a service account for GitHub Actions to use:
+
+`gcloud iam service-accounts create gh-actions`
+
+We'll use this service account in the next section to authenticate to GCP from GitHub Actions. Let's now grant a few
+permissions to the service account:
 
 ```shell
-gh secret set GCP_PROJECT_ID --body '<gcp_project_id>'
-gh secret set GCP_REGION --body '<gcp_region>'
-gh secret set GCP_SA_KEY --body $(cat <gpc_service_account_key.json> | base64)
+gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
+  --member=serviceAccount:gh-actions@<GCP_PROJECT_ID>.iam.gserviceaccount.com \
+  --role=roles/cloudbuild.builds.editor
+
+gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
+  --member=serviceAccount:gh-actions@<GCP_PROJECT_ID>.iam.gserviceaccount.com \
+  --role=roles/cloudbuild.builds.viewer
+
+gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
+  --member=serviceAccount:gh-actions@<GCP_PROJECT_ID>.iam.gserviceaccount.com \
+  --role=roles/storage.admin
+
+gcloud iam service-accounts add-iam-policy-binding \
+  <GCP_PROJECT_NUMBER>-compute@developer.gserviceaccount.com \
+  --member="serviceAccount:gh-actions@<GCP_PROJECT_ID>.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
 ```
+
+As a rule of thumb, try to always keep the permissions as granular as possible and follow the least-privilege principle.
+
+> Note: `<GCP_PROJECT_NUMBER>-compute@developer.gserviceaccount.com` refers to the Compute Engine default service account.
+> You can find the project number in the GCP console, or by running `gcloud projects describe <GCP_PROJECT_ID> --format='value(projectNumber)'`.
+
+## CI/CD Pipelines Using GitHub Actions
+
+[GitHub Actions](https://github.com/features/actions) is a reasonably good CI/CD platform. We use it to build and deploy
+this demo application to GCP. The [.github/workflows](.github/workflows) directory contains the definitions for the CI and CD pipelines.
+
+### Authenticating to GCP using a Service Account Key
+
+We use the [auth](https://github.com/google-github-actions/auth/tree/v1/) action to authenticate to GCP using a service account key.
+The service account key is a long-lived credential, thus it's not ideal from a security perspective.
+For a production-ready setup, we strongly recommend using [Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation) instead.
+
+Generate the service account key using the following command:
+
+`gcloud iam service-accounts keys create gh-actions-key.json --iam-account gh-actions@<GCP_PROJECT_ID>.iam.gserviceaccount.com`
+
+### Populating Secrets in GitHub
+
+The GCP service account key needs to be stored as a secret in the GitHub repo. Alongside, we store a few other GCP-related
+configuration values, such as project ID and region. Secrets can be accessed in the GitHub Actions workflows.
+
+We advise using [gh](https://cli.github.com/) to create the secrets:
+
+```shell
+gh secret set GCP_PROJECT_ID --body '<GCP_PROJECT_ID>'
+gh secret set GCP_REGION --body '<GCP_REGION>' # e.g. europe-west1
+gh secret set GCP_SA_KEY --body $(cat <GPC_SERVICE_ACCOUNT_KEY.json> | base64)
+```
+
+The CI and CD workflows reference these secrets and will now be able to authenticate to GCP.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
