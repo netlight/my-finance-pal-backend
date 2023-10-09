@@ -50,7 +50,7 @@ jobs:
       - name: Submit job to Cloud Build
         run: |
           gcloud builds submit \
-            --region=${{ secrets.GCP_REGION }} \
+            --region ${{ secrets.GCP_REGION }} \
             --config cloudbuild.yaml \
-            --substitutions=_FULL_IMAGE_NAME=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/my-finance-pal,_IMAGE_TAG=${{ github.sha }} \
+            --substitutions=_FULL_IMAGE_NAME=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-builds/my-finance-pal,_IMAGE_TAG=${{ github.sha }} \
             .

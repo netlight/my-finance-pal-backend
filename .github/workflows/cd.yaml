@@ -25,7 +25,7 @@ jobs:
       - name: Deploy app to Cloud Run
         run: |
           gcloud run deploy my-finance-pal \
-            --image=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/my-finance-pal:${{ github.sha }} \
+            --image ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-builds/my-finance-pal:${{ github.sha }} \
             --allow-unauthenticated \
             --region ${{ secrets.GCP_REGION }}
 
