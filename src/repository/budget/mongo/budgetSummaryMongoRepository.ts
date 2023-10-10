@@ -3,10 +3,10 @@ import { BudgetSummaryEntityConverter } from "../entity/converters";
 import { type BudgetId } from "../../../domain/budget";
 import { BudgetSummaryModel } from "./models";
 
-// TODO 4. add insertBudgetSummary function
+// TODO 2.3 - implement the new "insertBudgetSummary" function
 
 export const findBudgetSummary: BudgetSummaryRepository["find"] = async (
-  budgetId: BudgetId
+  budgetId: BudgetId,
 ) => {
   const found = await BudgetSummaryModel.findOne({ id: budgetId.value });
   if (found != null) {
@@ -15,7 +15,7 @@ export const findBudgetSummary: BudgetSummaryRepository["find"] = async (
 };
 
 const BudgetSummaryMongoRepository = (): BudgetSummaryRepository => ({
-  // TODO 5. add insertBudgetSummary to repository
+  // TODO 2.4. - add the "insertBudgetSummary" function to the repository
   find: findBudgetSummary,
 });
 
