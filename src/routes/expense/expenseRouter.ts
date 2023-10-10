@@ -25,7 +25,7 @@ const ExpenseRouter = (expenseUseCases: ExpenseUseCases): Router => {
   const router = Router();
   router.post(
     toExpressPath(apiPaths.createExpense),
-    asyncHandler(createExpense(expenseUseCases.addToBudget))
+    asyncHandler(createExpense(expenseUseCases.addToBudget)),
   );
 
   return router;

@@ -9,7 +9,7 @@ interface ExpenseUseCases {
    */
   addToBudget: (
     budgetId: BudgetId,
-    newExpense: NewExpense
+    newExpense: NewExpense,
   ) => Promise<Expense | undefined>;
 }
 
