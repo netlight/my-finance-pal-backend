@@ -6,7 +6,7 @@ interface ExpenseRepository {
   insert: (
     budgetId: BudgetId,
     spent: number,
-    expense: Expense
+    expense: Expense,
   ) => Promise<Expense | undefined>;
 }
 

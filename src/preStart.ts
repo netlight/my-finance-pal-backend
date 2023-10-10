@@ -27,7 +27,7 @@ const args = parse<Args>(
       alias: "e",
     },
   },
-  { partial: true }
+  { partial: true },
 );
 
 // Set the env file
