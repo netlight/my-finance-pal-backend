@@ -21,7 +21,7 @@ import type BudgetRepository from "../../repository/budget/budgetRepository";
 class ClassicBudgetService implements BudgetUseCases {
   constructor(
     private readonly budgetSummaryRepo: BudgetSummaryRepository,
-    private readonly budgetRepo: BudgetRepository
+    private readonly budgetRepo: BudgetRepository,
   ) {}
 
   async createBudget(newBudget: NewBudget): Promise<Budget> {
@@ -48,7 +48,7 @@ class ClassicBudgetService implements BudgetUseCases {
   }
 
   async getBudgetSummary(
-    budgetId: BudgetId
+    budgetId: BudgetId,
   ): Promise<BudgetSummary | undefined> {
     return await this.budgetSummaryRepo.find(budgetId);
   }

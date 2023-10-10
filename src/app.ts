@@ -36,13 +36,13 @@ app.use(
     validateRequests: true,
     // also validate our responses to the clients
     validateResponses: true,
-  })
+  }),
 );
 
 // Instantiate dependencies and pass them to the respective components needed for our use cases
 const budgetUseCases = BudgetService(
   BudgetSummaryMongoRepository(),
-  BudgetMongoRepository()
+  BudgetMongoRepository(),
 );
 const expenseUseCases = ExpenseService(ExpenseMongoRepository());
 app.use(ApiRouter(budgetUseCases, expenseUseCases));
