@@ -28,6 +28,9 @@ jobs:
       - name: Run unit tests
         run: yarn test:unit
 
+      - name: Run lint
+        run: yarn lint
+
   cloud_build:
     needs: build_and_test
     runs-on: ubuntu-latest

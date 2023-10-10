@@ -6,7 +6,7 @@ import currency from "currency.js";
 
 const addNewExpenseToBudget: (
   findAll: ExpenseRepository["findAllForBudget"],
-  insert: ExpenseRepository["insert"]
+  insert: ExpenseRepository["insert"],
 ) => ExpenseUseCases["addToBudget"] =
   (findAll, insert) => async (budgetId, newExpense) => {
     const existingExpenses = await findAll(budgetId);
@@ -34,15 +34,15 @@ const addNewExpenseToBudget: (
 const calculateSpent = (expenses: Expense[], newExpense: Expense): number =>
   expenses.reduce(
     (prev, curr) => prev.add(curr.amount),
-    currency(newExpense.amount)
+    currency(newExpense.amount),
   ).value;
 
 const ExpenseService: (
-  expenseRepository: ExpenseRepository
+  expenseRepository: ExpenseRepository,
 ) => ExpenseUseCases = (expenseRepository) => ({
   addToBudget: addNewExpenseToBudget(
     expenseRepository.findAllForBudget,
-    expenseRepository.insert
+    expenseRepository.insert,
   ),
 });
 

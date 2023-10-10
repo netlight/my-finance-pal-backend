@@ -5,7 +5,7 @@ class Limit {
     if (amount < 0) {
       throw new AppError(
         "InvalidLimit",
-        `Limits cannot be negative: ${amount}`
+        `Limits cannot be negative: ${amount}`,
       );
     }
   }
