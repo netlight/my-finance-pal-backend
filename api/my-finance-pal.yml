@@ -10,7 +10,7 @@ tags:
     description: Managing budgets
 paths:
   /budgets:
-    # TODO 1. add createBudget endpoint
+    # TODO 1. add a new endpoint for creating budgets
     get:
       tags:
         - budgets
