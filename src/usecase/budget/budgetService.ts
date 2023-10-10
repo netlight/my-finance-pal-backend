@@ -1,11 +1,9 @@
 import type BudgetSummaryRepository from "../../repository/budget/budgetSummaryRepository";
 import type BudgetUseCases from "./budgetUseCases";
 import type BudgetRepository from "../../repository/budget/budgetRepository";
-import { type Budget, type BudgetSummary } from "../../domain/budget";
-import UUID from "../../domain/uuid";
 
-// TODO 6. specify the type of CreateBudgetUseCase
-// TODO 7. implement the createBudget use case function
+// TODO 3.2. - specify the type of a new function "createBudget"
+// TODO 3.3. - implement the "createBudget" use case function
 
 export const getBudgetSummary: (
   findBudget: BudgetSummaryRepository["find"],
@@ -30,7 +28,7 @@ const BudgetService: (
   budgetSummaryRepo: BudgetSummaryRepository,
   budgetRepo: BudgetRepository,
 ) => BudgetUseCases = (budgetSummaryRepo, budgetRepo) => ({
-  // TODO 8. add createBudget use case to the service
+  // TODO 3.4. - add the "createBudget" use case function to the service
   getBudgetSummary: getBudgetSummary(budgetSummaryRepo.find),
   getBudgets: getBudgets(budgetRepo.findAll),
   deleteBudget: deleteBudget(budgetRepo.delete),
