@@ -4,7 +4,7 @@ import { type BudgetId } from "../../../domain/budget";
 import { BudgetSummaryModel } from "./models";
 
 export const insertBudgetSummary: BudgetSummaryRepository["insert"] = async (
-  summary
+  summary,
 ) => {
   const summaryEntity = BudgetSummaryEntityConverter.toEntity(summary);
   const summaryModel = new BudgetSummaryModel(summaryEntity);
@@ -13,7 +13,7 @@ export const insertBudgetSummary: BudgetSummaryRepository["insert"] = async (
 };
 
 export const findBudgetSummary: BudgetSummaryRepository["find"] = async (
-  budgetId: BudgetId
+  budgetId: BudgetId,
 ) => {
   const found = await BudgetSummaryModel.findOne({ id: budgetId.value });
   if (found != null) {

@@ -23,7 +23,7 @@ describe("budgetService", () => {
     // THEN
     expect(insertBudgetMock).toBeCalledWith(expect.objectContaining(newBudget));
     expect(insertedBudgetSummary).toEqual(
-      expect.objectContaining(expectedBudget)
+      expect.objectContaining(expectedBudget),
     );
   });
 });

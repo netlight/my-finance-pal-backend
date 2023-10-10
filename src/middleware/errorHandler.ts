@@ -13,7 +13,7 @@ export class AppError extends Error {
     public message: string,
     public HTTPStatus: number = 500,
     public isTrusted = true,
-    public cause?: unknown
+    public cause?: unknown,
   ) {
     super(message);
   }
@@ -34,14 +34,14 @@ export const listenToErrorEvents = (httpServer: Http.Server): void => {
 
   process.on("SIGTERM", () => {
     logger.error(
-      "App received SIGTERM event, try to gracefully close the server"
+      "App received SIGTERM event, try to gracefully close the server",
     );
     terminateHttpServerAndExit();
   });
 
   process.on("SIGINT", () => {
     logger.error(
-      "App received SIGINT event, try to gracefully close the server"
+      "App received SIGINT event, try to gracefully close the server",
     );
     terminateHttpServerAndExit();
   });
@@ -58,7 +58,7 @@ const handleError = (errorToHandle: unknown): void => {
   } catch (handlingError: unknown) {
     // Not using the logger here because it might have failed
     process.stdout.write(
-      "The error handler failed, here are the handler failure and then the origin error that it tried to handle"
+      "The error handler failed, here are the handler failure and then the origin error that it tried to handle",
     );
     process.stdout.write(JSON.stringify(handlingError));
     process.stdout.write(JSON.stringify(errorToHandle));
@@ -86,8 +86,8 @@ const normalizeError = (errorToHandle: unknown): AppError => {
   return new AppError(
     "general-error",
     `Error Handler received a none error instance with type - ${inputType}, value - ${util.inspect(
-      errorToHandle
-    )}`
+      errorToHandle,
+    )}`,
   );
 };
 
@@ -95,7 +95,7 @@ export const errorHandler = (
   err: Error,
   _: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void => {
   if (typeof err === "object") {
     const error = err as AppError;

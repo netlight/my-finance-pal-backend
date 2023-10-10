@@ -14,7 +14,7 @@ const budgetSummarySchema = new mongoose.Schema<BudgetSummaryEntity>(
     endDate: Types.Date,
     expenses: [expenseSchema],
   },
-  { strict: true, timestamps: true, versionKey: false }
+  { strict: true, timestamps: true, versionKey: false },
 );
 
 export default budgetSummarySchema;

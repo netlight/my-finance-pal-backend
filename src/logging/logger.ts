@@ -11,9 +11,9 @@ logger.add(
   new winston.transports.Console({
     format: winston.format.combine(
       winston.format.colorize({ all: true }),
-      winston.format.simple()
+      winston.format.simple(),
     ),
-  })
+  }),
 );
 
 /*

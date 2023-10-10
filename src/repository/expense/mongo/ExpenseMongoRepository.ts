@@ -15,7 +15,7 @@ export const findAllExpensesForBudget: ExpenseRepository["findAllForBudget"] =
 export const insertExpense: ExpenseRepository["insert"] = async (
   budgetId,
   spent,
-  expense
+  expense,
 ) => {
   const expenseEntity = ExpenseEntityConverter.toEntity(expense);
   const updatedSummary = await BudgetSummaryModel.findOneAndUpdate(
@@ -24,10 +24,10 @@ export const insertExpense: ExpenseRepository["insert"] = async (
       $set: { spent },
       $push: { expenses: expenseEntity },
     },
-    { returnDocument: "after" }
+    { returnDocument: "after" },
   );
   const updatedExpense = updatedSummary?.expenses.find(
-    (t) => t.id === expense.id.value
+    (t) => t.id === expense.id.value,
   );
   if (updatedExpense !== undefined) {
     return ExpenseEntityConverter.toDomain(updatedExpense);

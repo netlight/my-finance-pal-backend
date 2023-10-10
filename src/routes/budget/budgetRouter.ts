@@ -51,7 +51,7 @@ export const deleteBudget =
     const budgetId = new UUID(req.params.budgetId);
     const deleteResult = await deleteBudget(budgetId);
     res.sendStatus(
-      deleteResult.deleted ? StatusCodes.NO_CONTENT : StatusCodes.NOT_FOUND
+      deleteResult.deleted ? StatusCodes.NO_CONTENT : StatusCodes.NOT_FOUND,
     );
   };
 
@@ -59,19 +59,19 @@ const BudgetRouter = (budgetUseCases: BudgetUseCases): Router => {
   const router = Router();
   router.post(
     toExpressPath(apiPaths.createBudget),
-    asyncHandler(createBudget(budgetUseCases.createBudget))
+    asyncHandler(createBudget(budgetUseCases.createBudget)),
   );
   router.get(
     toExpressPath(apiPaths.getBudgets),
-    asyncHandler(getBudgets(budgetUseCases.getBudgets))
+    asyncHandler(getBudgets(budgetUseCases.getBudgets)),
   );
   router.get(
     toExpressPath(apiPaths.getBudgetSummary),
-    asyncHandler(getBudgetSummary(budgetUseCases.getBudgetSummary))
+    asyncHandler(getBudgetSummary(budgetUseCases.getBudgetSummary)),
   );
   router.delete(
     toExpressPath(apiPaths.deleteBudget),
-    asyncHandler(deleteBudget(budgetUseCases.deleteBudget))
+    asyncHandler(deleteBudget(budgetUseCases.deleteBudget)),
   );
 
   return router;

@@ -10,7 +10,7 @@ const expenseSchema = new mongoose.Schema<ExpenseEntity>(
     amount: Types.Number,
     date: Types.Date,
   },
-  { strict: true, _id: false }
+  { strict: true, _id: false },
 );
 
 export default expenseSchema;
